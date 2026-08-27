@@ -8,7 +8,6 @@ import com.pictet.AdventureBookApplication.model.GameStatus;
 import com.pictet.AdventureBookApplication.model.Option;
 import com.pictet.AdventureBookApplication.model.Section;
 import com.pictet.AdventureBookApplication.model.SectionType;
-import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
 
