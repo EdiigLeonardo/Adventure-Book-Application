@@ -63,6 +63,27 @@ cd AdventureBookApplication
 ./mvnw test
 ```
 
+## Run with Docker
+
+Docker Compose starts the Spring Boot backend and serves the Angular frontend through Nginx. Only the frontend port is exposed; requests under `/api` are proxied internally to the backend.
+
+Prerequisites: Docker Engine with the Compose plugin.
+
+From the repository root:
+
+```bash
+cp .env.example .env       # optional: adjust local settings, never add secrets here
+docker compose up --build
+```
+
+Open `http://localhost:8080`. To stop the containers, press `Ctrl+C`; to remove the containers and network afterwards, run:
+
+```bash
+docker compose down
+```
+
+Runtime settings such as `FRONTEND_PORT`, upload limits, CORS origins, H2 console and JPA schema mode can be supplied through `.env` or the shell environment. Do not place API keys, passwords or tokens in the Dockerfiles, Compose file, `.env.example` or the frontend bundle. Use a secrets manager or an externally provisioned environment variable for sensitive values.
+
 ## API surface
 
 The frontend uses these REST endpoints:
