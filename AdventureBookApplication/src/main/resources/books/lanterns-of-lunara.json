@@ -1,1 +1,161 @@
-{"id":"lanterns-of-lunara","title":"Lanterns of Lunara","author":"Nora Bell","difficulty":"BEGINNER","description":"Guide lost lantern spirits home.","sections":[{"id":"1","type":"BEGIN","text":"Lantern spirits gather at the bridge.","options":[{"description":"Light the first lantern","gotoId":"2"},{"description":"Follow the river","gotoId":"3"}]},{"id":"2","type":"NODE","text":"A small spirit asks for a song.","options":[{"description":"Sing softly","gotoId":"4","consequence":{"type":"GAIN_HEALTH","value":1}}]},{"id":"3","type":"NODE","text":"The river carries a silver key.","options":[{"description":"Retrieve the key","gotoId":"4","consequence":{"type":"LOSE_HEALTH","value":1}},{"description":"Return to the bridge","gotoId":"1"}]},{"id":"4","type":"NODE","text":"The village gate is dark.","options":[{"description":"Use the silver key","gotoId":"5"},{"description":"Knock three times","gotoId":"6"}]},{"id":"5","type":"NODE","text":"The gate opens to a lantern hall.","options":[{"description":"Enter the hall","gotoId":"7"}]},{"id":"6","type":"NODE","text":"A keeper appears with a candle.","options":[{"description":"Follow the keeper","gotoId":"7"}]},{"id":"7","type":"NODE","text":"Lanterns float toward the sky.","options":[{"description":"Release them","gotoId":"8"},{"description":"Count their lights","gotoId":"9"}]},{"id":"8","type":"NODE","text":"The spirits form a constellation.","options":[{"description":"Trace the constellation","gotoId":"10"}]},{"id":"9","type":"NODE","text":"One lantern is missing.","options":[{"description":"Search the riverbank","gotoId":"10","consequence":{"type":"LOSE_HEALTH","value":1}}]},{"id":"10","type":"NODE","text":"The last lantern waits in a willow.","options":[{"description":"Carry it home","gotoId":"11","consequence":{"type":"GAIN_HEALTH","value":2}}]},{"id":"11","type":"END","text":"Lunara glows until morning."},{"id":"12","type":"END","text":"Every lost spirit finds its way."}]}
+{
+  "id": "lanterns-of-lunara",
+  "title": "Lanterns of Lunara",
+  "author": "Nora Bell",
+  "difficulty": "BEGINNER",
+  "description": "Guide lost lantern spirits home.",
+  "sections": [
+    {
+      "id": "1",
+      "type": "BEGIN",
+      "text": "Lantern spirits gather at the bridge.",
+      "options": [
+        {
+          "description": "Light the first lantern",
+          "gotoId": "2"
+        },
+        {
+          "description": "Follow the river",
+          "gotoId": "3"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "type": "NODE",
+      "text": "A small spirit asks for a song.",
+      "options": [
+        {
+          "description": "Sing softly",
+          "gotoId": "4",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "type": "NODE",
+      "text": "The river carries a silver key.",
+      "options": [
+        {
+          "description": "Retrieve the key",
+          "gotoId": "4",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        },
+        {
+          "description": "Return to the bridge",
+          "gotoId": "1"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "type": "NODE",
+      "text": "The village gate is dark.",
+      "options": [
+        {
+          "description": "Use the silver key",
+          "gotoId": "5"
+        },
+        {
+          "description": "Knock three times",
+          "gotoId": "6"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "type": "NODE",
+      "text": "The gate opens to a lantern hall.",
+      "options": [
+        {
+          "description": "Enter the hall",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "NODE",
+      "text": "A keeper appears with a candle.",
+      "options": [
+        {
+          "description": "Follow the keeper",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "type": "NODE",
+      "text": "Lanterns float toward the sky.",
+      "options": [
+        {
+          "description": "Release them",
+          "gotoId": "8"
+        },
+        {
+          "description": "Count their lights",
+          "gotoId": "9"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "NODE",
+      "text": "The spirits form a constellation.",
+      "options": [
+        {
+          "description": "Trace the constellation",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "type": "NODE",
+      "text": "One lantern is missing.",
+      "options": [
+        {
+          "description": "Search the riverbank",
+          "gotoId": "10",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "type": "NODE",
+      "text": "The last lantern waits in a willow.",
+      "options": [
+        {
+          "description": "Carry it home",
+          "gotoId": "11",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "type": "END",
+      "text": "Lunara glows until morning."
+    },
+    {
+      "id": "12",
+      "type": "END",
+      "text": "Every lost spirit finds its way."
+    }
+  ]
+}

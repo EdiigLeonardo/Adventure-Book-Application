@@ -1,1 +1,169 @@
-{"id":"volcanic-crown","title":"Volcanic Crown","author":"Kaito Ash","difficulty":"ADVANCED","description":"Climb a volcano before its crown erupts.","sections":[{"id":"1","type":"BEGIN","text":"Ash falls on the lower trail.","options":[{"description":"Take the lava path","gotoId":"2","consequence":{"type":"LOSE_HEALTH","value":2}},{"description":"Find a windward route","gotoId":"3"}]},{"id":"2","type":"NODE","text":"Heat shimmers around you.","options":[{"description":"Sprint to the ridge","gotoId":"4"}]},{"id":"3","type":"NODE","text":"A miner offers a cooling charm.","options":[{"description":"Accept the charm","gotoId":"4","consequence":{"type":"GAIN_HEALTH","value":2}},{"description":"Return downhill","gotoId":"1"}]},{"id":"4","type":"NODE","text":"The ridge splits at a fumarole.","options":[{"description":"Cross the fumarole","gotoId":"5","consequence":{"type":"LOSE_HEALTH","value":1}},{"description":"Enter the old mine","gotoId":"6"}]},{"id":"5","type":"NODE","text":"A black bridge spans the crater.","options":[{"description":"Cross carefully","gotoId":"7"}]},{"id":"6","type":"NODE","text":"The mine contains a cold spring.","options":[{"description":"Drink from it","gotoId":"7","consequence":{"type":"GAIN_HEALTH","value":3}}]},{"id":"7","type":"NODE","text":"The summit trembles.","options":[{"description":"Climb the obsidian stairs","gotoId":"8"},{"description":"Wait in the mine","gotoId":"6"}]},{"id":"8","type":"NODE","text":"A guardian guards the crown.","options":[{"description":"Challenge the guardian","gotoId":"9","consequence":{"type":"LOSE_HEALTH","value":3}}]},{"id":"9","type":"NODE","text":"The crown floats above the vent.","options":[{"description":"Reach for it","gotoId":"10"}]},{"id":"10","type":"NODE","text":"The volcano begins to erupt.","options":[{"description":"Raise the crown","gotoId":"11","consequence":{"type":"GAIN_HEALTH","value":1}}]},{"id":"11","type":"END","text":"The crown seals the volcano."},{"id":"12","type":"END","text":"The mountain settles under a new moon."}]}
+{
+  "id": "volcanic-crown",
+  "title": "Volcanic Crown",
+  "author": "Kaito Ash",
+  "difficulty": "ADVANCED",
+  "description": "Climb a volcano before its crown erupts.",
+  "sections": [
+    {
+      "id": "1",
+      "type": "BEGIN",
+      "text": "Ash falls on the lower trail.",
+      "options": [
+        {
+          "description": "Take the lava path",
+          "gotoId": "2",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 2
+          }
+        },
+        {
+          "description": "Find a windward route",
+          "gotoId": "3"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "type": "NODE",
+      "text": "Heat shimmers around you.",
+      "options": [
+        {
+          "description": "Sprint to the ridge",
+          "gotoId": "4"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "type": "NODE",
+      "text": "A miner offers a cooling charm.",
+      "options": [
+        {
+          "description": "Accept the charm",
+          "gotoId": "4",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        },
+        {
+          "description": "Return downhill",
+          "gotoId": "1"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "type": "NODE",
+      "text": "The ridge splits at a fumarole.",
+      "options": [
+        {
+          "description": "Cross the fumarole",
+          "gotoId": "5",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        },
+        {
+          "description": "Enter the old mine",
+          "gotoId": "6"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "type": "NODE",
+      "text": "A black bridge spans the crater.",
+      "options": [
+        {
+          "description": "Cross carefully",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "NODE",
+      "text": "The mine contains a cold spring.",
+      "options": [
+        {
+          "description": "Drink from it",
+          "gotoId": "7",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "type": "NODE",
+      "text": "The summit trembles.",
+      "options": [
+        {
+          "description": "Climb the obsidian stairs",
+          "gotoId": "8"
+        },
+        {
+          "description": "Wait in the mine",
+          "gotoId": "6"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "NODE",
+      "text": "A guardian guards the crown.",
+      "options": [
+        {
+          "description": "Challenge the guardian",
+          "gotoId": "9",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "type": "NODE",
+      "text": "The crown floats above the vent.",
+      "options": [
+        {
+          "description": "Reach for it",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "type": "NODE",
+      "text": "The volcano begins to erupt.",
+      "options": [
+        {
+          "description": "Raise the crown",
+          "gotoId": "11",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "type": "END",
+      "text": "The crown seals the volcano."
+    },
+    {
+      "id": "12",
+      "type": "END",
+      "text": "The mountain settles under a new moon."
+    }
+  ]
+}

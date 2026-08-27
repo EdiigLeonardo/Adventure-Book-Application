@@ -1,1 +1,161 @@
-{"id":"reef-of-mirrors","title":"Reef of Mirrors","author":"Coral Finch","difficulty":"INTERMEDIATE","description":"Dive through a reef that reflects possible futures.","sections":[{"id":"1","type":"BEGIN","text":"Your boat reaches the mirror reef.","options":[{"description":"Dive into blue water","gotoId":"2"},{"description":"Anchor near the cliffs","gotoId":"3"}]},{"id":"2","type":"NODE","text":"Fish form an arrow.","options":[{"description":"Follow the arrow","gotoId":"4","consequence":{"type":"GAIN_HEALTH","value":1}}]},{"id":"3","type":"NODE","text":"A tide pool contains a pearl.","options":[{"description":"Take the pearl","gotoId":"4","consequence":{"type":"LOSE_HEALTH","value":1}},{"description":"Leave it untouched","gotoId":"5"}]},{"id":"4","type":"NODE","text":"A mirror archway splits in two.","options":[{"description":"Swim left","gotoId":"6"},{"description":"Swim right","gotoId":"7"}]},{"id":"5","type":"NODE","text":"Dolphins guide your boat.","options":[{"description":"Follow the dolphins","gotoId":"7"}]},{"id":"6","type":"NODE","text":"You see a vision of a storm.","options":[{"description":"Warn the fleet","gotoId":"8","consequence":{"type":"LOSE_HEALTH","value":1}}]},{"id":"7","type":"NODE","text":"A calm lagoon hides a temple.","options":[{"description":"Enter the temple","gotoId":"8"},{"description":"Return to the archway","gotoId":"4"}]},{"id":"8","type":"NODE","text":"The temple door asks for truth.","options":[{"description":"Speak your name","gotoId":"9"}]},{"id":"9","type":"NODE","text":"The mirrors align.","options":[{"description":"Touch the central mirror","gotoId":"10"}]},{"id":"10","type":"NODE","text":"A current pulls you upward.","options":[{"description":"Release your gear","gotoId":"11","consequence":{"type":"GAIN_HEALTH","value":2}}]},{"id":"11","type":"END","text":"The fleet avoids the storm."},{"id":"12","type":"END","text":"The reef reveals its oldest secret."}]}
+{
+  "id": "reef-of-mirrors",
+  "title": "Reef of Mirrors",
+  "author": "Coral Finch",
+  "difficulty": "INTERMEDIATE",
+  "description": "Dive through a reef that reflects possible futures.",
+  "sections": [
+    {
+      "id": "1",
+      "type": "BEGIN",
+      "text": "Your boat reaches the mirror reef.",
+      "options": [
+        {
+          "description": "Dive into blue water",
+          "gotoId": "2"
+        },
+        {
+          "description": "Anchor near the cliffs",
+          "gotoId": "3"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "type": "NODE",
+      "text": "Fish form an arrow.",
+      "options": [
+        {
+          "description": "Follow the arrow",
+          "gotoId": "4",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "type": "NODE",
+      "text": "A tide pool contains a pearl.",
+      "options": [
+        {
+          "description": "Take the pearl",
+          "gotoId": "4",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        },
+        {
+          "description": "Leave it untouched",
+          "gotoId": "5"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "type": "NODE",
+      "text": "A mirror archway splits in two.",
+      "options": [
+        {
+          "description": "Swim left",
+          "gotoId": "6"
+        },
+        {
+          "description": "Swim right",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "type": "NODE",
+      "text": "Dolphins guide your boat.",
+      "options": [
+        {
+          "description": "Follow the dolphins",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "NODE",
+      "text": "You see a vision of a storm.",
+      "options": [
+        {
+          "description": "Warn the fleet",
+          "gotoId": "8",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "type": "NODE",
+      "text": "A calm lagoon hides a temple.",
+      "options": [
+        {
+          "description": "Enter the temple",
+          "gotoId": "8"
+        },
+        {
+          "description": "Return to the archway",
+          "gotoId": "4"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "NODE",
+      "text": "The temple door asks for truth.",
+      "options": [
+        {
+          "description": "Speak your name",
+          "gotoId": "9"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "type": "NODE",
+      "text": "The mirrors align.",
+      "options": [
+        {
+          "description": "Touch the central mirror",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "type": "NODE",
+      "text": "A current pulls you upward.",
+      "options": [
+        {
+          "description": "Release your gear",
+          "gotoId": "11",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "type": "END",
+      "text": "The fleet avoids the storm."
+    },
+    {
+      "id": "12",
+      "type": "END",
+      "text": "The reef reveals its oldest secret."
+    }
+  ]
+}

@@ -1,1 +1,169 @@
-{"id":"emerald-labyrinth","title":"Emerald Labyrinth","author":"Bea Moss","difficulty":"ADVANCED","description":"Solve a living maze beneath an emerald moon.","sections":[{"id":"1","type":"BEGIN","text":"Vines close behind you.","options":[{"description":"Take the eastern arch","gotoId":"2"},{"description":"Mark the entrance","gotoId":"3"}]},{"id":"2","type":"NODE","text":"The walls whisper directions.","options":[{"description":"Trust the whisper","gotoId":"4","consequence":{"type":"LOSE_HEALTH","value":1}}]},{"id":"3","type":"NODE","text":"Your mark grows into a flower.","options":[{"description":"Pick the flower","gotoId":"4","consequence":{"type":"GAIN_HEALTH","value":1}},{"description":"Leave it growing","gotoId":"5"}]},{"id":"4","type":"NODE","text":"A bridge of leaves sways.","options":[{"description":"Cross the bridge","gotoId":"6"},{"description":"Return to the arch","gotoId":"2"}]},{"id":"5","type":"NODE","text":"The flower points to a fountain.","options":[{"description":"Drink the green water","gotoId":"6","consequence":{"type":"GAIN_HEALTH","value":2}}]},{"id":"6","type":"NODE","text":"A stone sphinx blocks the corridor.","options":[{"description":"Solve the riddle","gotoId":"7"},{"description":"Sneak behind it","gotoId":"8","consequence":{"type":"LOSE_HEALTH","value":2}}]},{"id":"7","type":"NODE","text":"The sphinx opens a spiral path.","options":[{"description":"Follow the spiral","gotoId":"9"}]},{"id":"8","type":"NODE","text":"Thorns guard a hidden door.","options":[{"description":"Cut through","gotoId":"9","consequence":{"type":"LOSE_HEALTH","value":1}}]},{"id":"9","type":"NODE","text":"An emerald heart beats below.","options":[{"description":"Touch the heart","gotoId":"10"}]},{"id":"10","type":"NODE","text":"The maze asks for a guide.","options":[{"description":"Guide the vines","gotoId":"11","consequence":{"type":"GAIN_HEALTH","value":2}}]},{"id":"11","type":"END","text":"The labyrinth becomes a garden."},{"id":"12","type":"END","text":"The emerald moon remembers your name."}]}
+{
+  "id": "emerald-labyrinth",
+  "title": "Emerald Labyrinth",
+  "author": "Bea Moss",
+  "difficulty": "ADVANCED",
+  "description": "Solve a living maze beneath an emerald moon.",
+  "sections": [
+    {
+      "id": "1",
+      "type": "BEGIN",
+      "text": "Vines close behind you.",
+      "options": [
+        {
+          "description": "Take the eastern arch",
+          "gotoId": "2"
+        },
+        {
+          "description": "Mark the entrance",
+          "gotoId": "3"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "type": "NODE",
+      "text": "The walls whisper directions.",
+      "options": [
+        {
+          "description": "Trust the whisper",
+          "gotoId": "4",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "type": "NODE",
+      "text": "Your mark grows into a flower.",
+      "options": [
+        {
+          "description": "Pick the flower",
+          "gotoId": "4",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        },
+        {
+          "description": "Leave it growing",
+          "gotoId": "5"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "type": "NODE",
+      "text": "A bridge of leaves sways.",
+      "options": [
+        {
+          "description": "Cross the bridge",
+          "gotoId": "6"
+        },
+        {
+          "description": "Return to the arch",
+          "gotoId": "2"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "type": "NODE",
+      "text": "The flower points to a fountain.",
+      "options": [
+        {
+          "description": "Drink the green water",
+          "gotoId": "6",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "NODE",
+      "text": "A stone sphinx blocks the corridor.",
+      "options": [
+        {
+          "description": "Solve the riddle",
+          "gotoId": "7"
+        },
+        {
+          "description": "Sneak behind it",
+          "gotoId": "8",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "type": "NODE",
+      "text": "The sphinx opens a spiral path.",
+      "options": [
+        {
+          "description": "Follow the spiral",
+          "gotoId": "9"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "NODE",
+      "text": "Thorns guard a hidden door.",
+      "options": [
+        {
+          "description": "Cut through",
+          "gotoId": "9",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "type": "NODE",
+      "text": "An emerald heart beats below.",
+      "options": [
+        {
+          "description": "Touch the heart",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "type": "NODE",
+      "text": "The maze asks for a guide.",
+      "options": [
+        {
+          "description": "Guide the vines",
+          "gotoId": "11",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "type": "END",
+      "text": "The labyrinth becomes a garden."
+    },
+    {
+      "id": "12",
+      "type": "END",
+      "text": "The emerald moon remembers your name."
+    }
+  ]
+}

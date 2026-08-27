@@ -1,1 +1,165 @@
-{"id":"tidebound-kingdom","title":"Tidebound Kingdom","author":"Owen Maris","difficulty":"INTERMEDIATE","description":"Negotiate peace between two ocean kingdoms.","sections":[{"id":"1","type":"BEGIN","text":"The tide reveals a drowned road.","options":[{"description":"Walk toward the palace","gotoId":"2"},{"description":"Visit the fishermen","gotoId":"3"}]},{"id":"2","type":"NODE","text":"A gate guard demands a token.","options":[{"description":"Show your sea glass","gotoId":"4"},{"description":"Return to the shore","gotoId":"1"}]},{"id":"3","type":"NODE","text":"Fishermen offer a pearl map.","options":[{"description":"Accept the map","gotoId":"4","consequence":{"type":"GAIN_HEALTH","value":1}}]},{"id":"4","type":"NODE","text":"A whirlpool guards the palace.","options":[{"description":"Dive beneath it","gotoId":"5","consequence":{"type":"LOSE_HEALTH","value":2}},{"description":"Sail around it","gotoId":"6"}]},{"id":"5","type":"NODE","text":"A coral tunnel leads inside.","options":[{"description":"Follow the lanternfish","gotoId":"7"}]},{"id":"6","type":"NODE","text":"A hidden cove contains a bell.","options":[{"description":"Ring the bell","gotoId":"7","consequence":{"type":"GAIN_HEALTH","value":2}}]},{"id":"7","type":"NODE","text":"Two rulers wait in silence.","options":[{"description":"Offer the pearl map","gotoId":"8"},{"description":"Ask for a trial","gotoId":"9","consequence":{"type":"LOSE_HEALTH","value":1}}]},{"id":"8","type":"NODE","text":"The rulers compare their maps.","options":[{"description":"Draw a shared border","gotoId":"10"}]},{"id":"9","type":"NODE","text":"The trial is a race with the tide.","options":[{"description":"Race the current","gotoId":"10"}]},{"id":"10","type":"NODE","text":"The kingdoms await your proposal.","options":[{"description":"Speak for peace","gotoId":"11","consequence":{"type":"GAIN_HEALTH","value":1}}]},{"id":"11","type":"END","text":"The tidebound kingdoms sign a truce."},{"id":"12","type":"END","text":"The drowned road becomes a bridge."}]}
+{
+  "id": "tidebound-kingdom",
+  "title": "Tidebound Kingdom",
+  "author": "Owen Maris",
+  "difficulty": "INTERMEDIATE",
+  "description": "Negotiate peace between two ocean kingdoms.",
+  "sections": [
+    {
+      "id": "1",
+      "type": "BEGIN",
+      "text": "The tide reveals a drowned road.",
+      "options": [
+        {
+          "description": "Walk toward the palace",
+          "gotoId": "2"
+        },
+        {
+          "description": "Visit the fishermen",
+          "gotoId": "3"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "type": "NODE",
+      "text": "A gate guard demands a token.",
+      "options": [
+        {
+          "description": "Show your sea glass",
+          "gotoId": "4"
+        },
+        {
+          "description": "Return to the shore",
+          "gotoId": "1"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "type": "NODE",
+      "text": "Fishermen offer a pearl map.",
+      "options": [
+        {
+          "description": "Accept the map",
+          "gotoId": "4",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "type": "NODE",
+      "text": "A whirlpool guards the palace.",
+      "options": [
+        {
+          "description": "Dive beneath it",
+          "gotoId": "5",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 2
+          }
+        },
+        {
+          "description": "Sail around it",
+          "gotoId": "6"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "type": "NODE",
+      "text": "A coral tunnel leads inside.",
+      "options": [
+        {
+          "description": "Follow the lanternfish",
+          "gotoId": "7"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "NODE",
+      "text": "A hidden cove contains a bell.",
+      "options": [
+        {
+          "description": "Ring the bell",
+          "gotoId": "7",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "type": "NODE",
+      "text": "Two rulers wait in silence.",
+      "options": [
+        {
+          "description": "Offer the pearl map",
+          "gotoId": "8"
+        },
+        {
+          "description": "Ask for a trial",
+          "gotoId": "9",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "NODE",
+      "text": "The rulers compare their maps.",
+      "options": [
+        {
+          "description": "Draw a shared border",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "type": "NODE",
+      "text": "The trial is a race with the tide.",
+      "options": [
+        {
+          "description": "Race the current",
+          "gotoId": "10"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "type": "NODE",
+      "text": "The kingdoms await your proposal.",
+      "options": [
+        {
+          "description": "Speak for peace",
+          "gotoId": "11",
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "type": "END",
+      "text": "The tidebound kingdoms sign a truce."
+    },
+    {
+      "id": "12",
+      "type": "END",
+      "text": "The drowned road becomes a bridge."
+    }
+  ]
+}
