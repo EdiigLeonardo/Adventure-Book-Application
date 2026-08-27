@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.BookStatus;
 import com.pictet.AdventureBookApplication.model.GameSession;
 import com.pictet.AdventureBookApplication.model.GameStatus;
 import com.pictet.AdventureBookApplication.model.Option;
@@ -79,7 +80,7 @@ class GameControllerTest {
     @Test
     void startGame_withInvalidBook_returnsConflict() throws Exception {
         Book invalidBook = buildBook("invalid-book");
-        invalidBook.setStatus("INVALID");
+        invalidBook.setStatus(BookStatus.INVALID);
 
         when(catalogService.findById("invalid-book")).thenReturn(invalidBook);
 

@@ -3,6 +3,7 @@ package com.pictet.AdventureBookApplication.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.BookStatus;
 import com.pictet.AdventureBookApplication.model.Difficulty;
 import com.pictet.AdventureBookApplication.validation.BookValidatorService;
 import com.pictet.AdventureBookApplication.validation.ValidationResult;
@@ -40,7 +41,7 @@ public class BookCatalogService {
             .filter(book -> query == null || query.isBlank() || containsQuery(book, query))
             .filter(book -> difficulty == null || difficulty.isBlank()
                 || Objects.equals(book.getDifficulty(), difficulty.trim().toUpperCase(java.util.Locale.ROOT)))
-            .filter(book -> status == null || status.isBlank() || Objects.equals(book.getStatus(), status))
+            .filter(book -> status == null || status.isBlank() || Objects.equals(book.getStatus().name(), status))
             .collect(Collectors.toList());
     }
 
@@ -58,7 +59,7 @@ public class BookCatalogService {
             throw new IllegalArgumentException(String.join("; ", validationResult.getErrors()));
         }
         normalizeDifficulty(book);
-        book.setStatus("VALID");
+        book.setStatus(BookStatus.VALID);
 
         Book existing = booksById.get(book.getId());
         if (existing != null && objectMapper.valueToTree(existing).equals(objectMapper.valueToTree(book))) {
@@ -102,7 +103,7 @@ public class BookCatalogService {
                         }
                         normalizeDifficulty(book);
                         ValidationResult validationResult = validatorService.validate(book);
-                        book.setStatus(validationResult != null && validationResult.isValid() ? "VALID" : "INVALID");
+                        book.setStatus(validationResult != null && validationResult.isValid() ? BookStatus.VALID : BookStatus.INVALID);
                         booksById.put(book.getId(), book);
                     }
                 } catch (Exception ex) {

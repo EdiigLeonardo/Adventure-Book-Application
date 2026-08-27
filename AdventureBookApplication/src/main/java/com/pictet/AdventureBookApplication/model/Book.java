@@ -32,7 +32,7 @@ public class Book {
     private String description;
 
     @JsonProperty("status")
-    private String status = "VALID";
+    private BookStatus status = BookStatus.VALID;
 
     @JsonProperty("sections")
     private List<Section> sections = new ArrayList<>();

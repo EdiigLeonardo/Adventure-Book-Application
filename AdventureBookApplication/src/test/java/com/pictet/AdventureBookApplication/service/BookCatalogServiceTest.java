@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.BookStatus;
 import com.pictet.AdventureBookApplication.model.Difficulty;
 import com.pictet.AdventureBookApplication.model.Option;
 import com.pictet.AdventureBookApplication.model.Section;
@@ -44,8 +45,8 @@ class BookCatalogServiceTest {
         // Recreate service after mock is set (constructor triggers loadDefaultBooks)
         catalogService = new BookCatalogService(validatorService);
 
-        bookA = buildBook("book-a", "Pirates", "MEDIUM", "VALID");
-        bookB = buildBook("book-b", "Garden", "EASY", "VALID");
+        bookA = buildBook("book-a", "Pirates", "MEDIUM", BookStatus.VALID);
+        bookB = buildBook("book-b", "Garden", "EASY", BookStatus.VALID);
 
         ValidationResult validResult = new ValidationResult();
         when(validatorService.validate(any())).thenReturn(validResult);
@@ -167,7 +168,7 @@ class BookCatalogServiceTest {
         assertThat(saved).isNotNull();
         assertThat(saved.getId()).isEqualTo("book-new");
         assertThat(saved.getDifficulty()).isEqualTo("ADVANCED");
-        assertThat(saved.getStatus()).isEqualTo("VALID");
+        assertThat(saved.getStatus()).isEqualTo(BookStatus.VALID);
         assertThat(catalogService.findById("book-new")).isNotNull();
     }
 
@@ -210,7 +211,7 @@ class BookCatalogServiceTest {
 
     // ── Helpers ───────────────────────────────────────────────────────────────
 
-    private Book buildBook(String id, String title, String difficulty, String status) {
+    private Book buildBook(String id, String title, String difficulty, BookStatus status) {
         Option opt = new Option();
         opt.setGotoId("end");
         opt.setDescription("Proceed");

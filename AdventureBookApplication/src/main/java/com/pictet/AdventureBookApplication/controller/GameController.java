@@ -1,6 +1,7 @@
 package com.pictet.AdventureBookApplication.controller;
 
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.BookStatus;
 import com.pictet.AdventureBookApplication.model.GameSession;
 import com.pictet.AdventureBookApplication.persistence.GameSessionRepository;
 import com.pictet.AdventureBookApplication.service.BookCatalogService;
@@ -40,7 +41,7 @@ public class GameController {
             return ResponseEntity.notFound().build();
         }
 
-        if (!"VALID".equalsIgnoreCase(book.getStatus())) {
+        if (book.getStatus() != BookStatus.VALID) {
             throw new IllegalStateException("Cannot start a game with an invalid book: " + bookId);
         }
 

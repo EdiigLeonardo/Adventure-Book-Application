@@ -58,6 +58,10 @@ public class GameSession {
     @JsonProperty("createdAt")
     private Instant createdAt = Instant.now();
 
+    @jakarta.persistence.Version
+    @JsonIgnore
+    private Long version;
+
     @Transient
     @JsonIgnore
     private Book book;
