@@ -20,10 +20,15 @@ export class BookCatalogComponent {
 
   @Output() bookSelected = new EventEmitter<Book>();
   @Output() adventureStarted = new EventEmitter<Book>();
+  @Output() searchChanged = new EventEmitter<string>();
+  @Output() difficultyChanged = new EventEmitter<string>();
+  activeDifficulty = 'ALL';
 
   selectBook(book: Book): void {
     this.bookSelected.emit(book);
   }
+
+  setDifficulty(value: string): void { this.activeDifficulty = value; this.difficultyChanged.emit(value); }
 
   startAdventure(book: Book, event: Event): void {
     event.stopPropagation();
