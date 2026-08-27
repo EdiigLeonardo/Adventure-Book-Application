@@ -83,16 +83,16 @@ class GameControllerTest {
         GameSession session = buildSession("sess-1", "book-1");
         Book book = buildBook("book-1");
         GameSession updated = buildSession("sess-1", "book-1");
-        updated.setCurrentSectionId("section-2");
+        updated.setCurrentSectionId("end");
 
         when(gameSessionRepository.findById("sess-1")).thenReturn(Optional.of(session));
         when(catalogService.findById("book-1")).thenReturn(book);
-        when(gameEngineService.chooseOption(any(), eq("section-2"))).thenReturn(updated);
+        when(gameEngineService.chooseOption(any(), eq("end"))).thenReturn(updated);
         when(gameSessionRepository.save(updated)).thenReturn(updated);
 
         mockMvc.perform(post("/api/v1/games/sess-1/choose")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(Map.of("gotoId", "section-2"))))
+                .content(objectMapper.writeValueAsString(Map.of("gotoId", "end"))))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id", is("sess-1")));
     }

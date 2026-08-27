@@ -18,6 +18,11 @@ public class GameEngineService {
         if (book == null || book.getSections() == null || book.getSections().isEmpty()) {
             throw new IllegalArgumentException("A valid book with at least one section is required.");
         }
+        var begins = book.getSections().stream()
+            .filter(section -> section != null && section.getType() == SectionType.BEGIN).toList();
+        if (begins.size() != 1) {
+            throw new IllegalArgumentException("Book must contain exactly one BEGIN section.");
+        }
 
         GameSession session = new GameSession();
         session.setId(UUID.randomUUID().toString());
@@ -26,15 +31,10 @@ public class GameEngineService {
         session.setHealth(10);
         session.setStatus(GameStatus.IN_PROGRESS);
 
-        Section begin = book.getSections().stream()
-            .filter(section -> section != null && section.getType() == SectionType.BEGIN)
-            .findFirst()
-            .orElse(null);
+        Section begin = begins.get(0);
 
-        if (begin != null) {
-            session.setCurrentSectionId(begin.getId());
-            session.getHistory().add("Started at section " + begin.getId());
-        }
+        session.setCurrentSectionId(begin.getId());
+        session.getHistory().add("Started at section " + begin.getId());
         return session;
     }
 

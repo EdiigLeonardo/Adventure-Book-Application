@@ -31,6 +31,9 @@ public class GameController {
 
     @PostMapping("/games/start")
     public ResponseEntity<GameSession> startGame(@RequestBody Map<String, String> payload) {
+        if (payload == null || payload.get("bookId") == null || payload.get("bookId").isBlank()) {
+            throw new IllegalArgumentException("bookId is required.");
+        }
         String bookId = payload.get("bookId");
         Book book = catalogService.findById(bookId);
         if (book == null) {
@@ -56,6 +59,13 @@ public class GameController {
 
         session.setBook(book);
         String gotoId = payload.get("gotoId");
+        if (gotoId == null || gotoId.isBlank()) {
+            throw new IllegalArgumentException("gotoId is required.");
+        }
+        var current = book.getSections().stream().filter(s -> s != null && s.getId() != null && s.getId().equals(session.getCurrentSectionId())).findFirst().orElse(null);
+        if (current == null || current.getOptions() == null || current.getOptions().stream().noneMatch(o -> gotoId.equals(o.getGotoId()))) {
+            throw new IllegalArgumentException("The selected option is not available from the current section.");
+        }
         GameSession updated = gameEngineService.chooseOption(session, gotoId);
         GameSession saved = gameSessionRepository.save(updated);
         return ResponseEntity.ok(saved);
