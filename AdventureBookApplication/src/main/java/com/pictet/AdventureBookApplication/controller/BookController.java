@@ -5,6 +5,7 @@ import com.pictet.AdventureBookApplication.service.BookCatalogService;
 import com.pictet.AdventureBookApplication.validation.BookValidatorService;
 import com.pictet.AdventureBookApplication.validation.ValidationResult;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,11 +48,21 @@ public class BookController {
     @PostMapping(value = "/books", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadBook(@RequestParam("file") MultipartFile file) {
         if (file == null || file.isEmpty()) {
-            return ResponseEntity.badRequest().body("A JSON book file is required.");
+            throw new IllegalArgumentException("A JSON book file is required.");
+        }
+        String filename = file.getOriginalFilename();
+        if (filename == null || !filename.toLowerCase().endsWith(".json")) {
+            throw new IllegalArgumentException("Only .json files are accepted.");
+        }
+        String contentType = file.getContentType();
+        if (contentType != null && !contentType.equalsIgnoreCase(MediaType.APPLICATION_JSON_VALUE)
+                && !contentType.equalsIgnoreCase(MediaType.TEXT_PLAIN_VALUE)
+                && !contentType.equalsIgnoreCase(MediaType.APPLICATION_OCTET_STREAM_VALUE)) {
+            throw new IllegalArgumentException("The uploaded file must contain JSON.");
         }
 
         try {
-            String json = new String(file.getBytes());
+            String json = new String(file.getBytes(), StandardCharsets.UTF_8);
             ValidationResult validationResult = validatorService.validateRawJson(json);
             if (!validationResult.isValid()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationResult);
@@ -61,7 +72,7 @@ public class BookController {
             Book created = catalogService.saveUploadedBook(book);
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch (IOException ex) {
-            return ResponseEntity.badRequest().body("Unable to parse the uploaded JSON file: " + ex.getMessage());
+            throw new IllegalArgumentException("Unable to parse the uploaded JSON file.", ex);
         }
     }
 }
