@@ -1,0 +1,35 @@
+<mat-card class="upload-card">
+  <mat-card-header>
+    <mat-card-title>Publish New Adventure</mat-card-title>
+    <mat-card-subtitle>JSON Graph Import & BFS Audit</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="upload-hint">
+      Import custom interactive book JSON files. Structural validity and reachable graph integrity will be audited automatically.
+    </p>
+
+    <div class="drop-zone" (click)="fileInput.click()">
+      <mat-icon class="upload-icon">cloud_upload</mat-icon>
+      <span class="drop-text">{{ isUploading ? "Auditing & Uploading..." : "Click to select JSON file" }}</span>
+    </div>
+
+    <button
+      mat-flat-button
+      color="accent"
+      (click)="fileInput.click()"
+      [disabled]="isUploading"
+      class="upload-button"
+    >
+      <span>{{ isUploading ? "Processing..." : "Select Adventure File" }}</span>
+    </button>
+
+    <input
+      #fileInput
+      type="file"
+      accept="application/json"
+      hidden
+      (change)="onFileSelected($event)"
+    />
+  </mat-card-content>
+</mat-card>

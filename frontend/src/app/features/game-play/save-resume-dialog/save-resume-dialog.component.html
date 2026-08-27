@@ -1,0 +1,78 @@
+<h2 mat-dialog-title class="dialog-title">
+  {{ mode === 'save' ? 'Session Save & Management' : 'Restore Saved Adventure' }}
+</h2>
+
+<mat-dialog-content>
+  <div class="mode-tabs">
+    <button
+      mat-button
+      [class.active]="mode === 'save'"
+      (click)="setMode('save')"
+      [disabled]="!currentSessionId"
+    >
+      Save Progress
+    </button>
+    <button
+      mat-button
+      [class.active]="mode === 'resume'"
+      (click)="setMode('resume')"
+    >
+      Resume Adventure
+    </button>
+  </div>
+
+  <div *ngIf="mode === 'save'" class="dialog-section">
+    <p class="section-desc">Active Session Unique Identifier:</p>
+    <div class="session-id-box">
+      <code>{{ currentSessionId || 'No active session' }}</code>
+      <button
+        mat-outlined-button
+        color="primary"
+        (click)="copySessionId()"
+        [disabled]="!currentSessionId"
+      >
+        {{ copied ? 'Copied' : 'Copy ID' }}
+      </button>
+    </div>
+    <p class="help-text">
+      Saving persists your health points, current graph node, and choice history to the backend database.
+    </p>
+  </div>
+
+  <div *ngIf="mode === 'resume'" class="dialog-section">
+    <p class="section-desc">Enter your saved Session ID to restore state:</p>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Session ID</mat-label>
+      <input
+        matInput
+        [(ngModel)]="inputSessionId"
+        placeholder="e.g. 550e8400-e29b-41d4-a716-446655440000"
+        (keyup.enter)="confirmResume()"
+      />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="cancel()">Cancel</button>
+
+  <button
+    *ngIf="mode === 'save'"
+    mat-flat-button
+    color="primary"
+    (click)="confirmSave()"
+    [disabled]="!currentSessionId"
+  >
+    Save Progress
+  </button>
+
+  <button
+    *ngIf="mode === 'resume'"
+    mat-flat-button
+    color="accent"
+    (click)="confirmResume()"
+    [disabled]="!inputSessionId.trim()"
+  >
+    Resume Session
+  </button>
+</mat-dialog-actions>

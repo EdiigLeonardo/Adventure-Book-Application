@@ -1,0 +1,171 @@
+/* Pictet Global Design Tokens & Luxury Theme */
+
+:root {
+  --pictet-navy: #0B2526;
+  --pictet-navy-dark: #05191A;
+  --pictet-navy-light: #163C3E;
+  --pictet-gold: #C5A059;
+  --pictet-gold-hover: #B48D46;
+  --pictet-gold-light: #F7F3E9;
+  --pictet-bg: #F5F4F0;
+  --pictet-surface: #FFFFFF;
+  --pictet-border: #E2DFD7;
+  --pictet-border-strong: #C8C4B8;
+  --pictet-text: #1A2525;
+  --pictet-text-muted: #5D6A69;
+  --pictet-shadow: 0 8px 30px rgba(11, 37, 38, 0.06), 0 2px 6px rgba(11, 37, 38, 0.03);
+  --pictet-radius: 6px;
+  
+  --font-serif: 'Lardy Serif', Georgia, serif;
+  --font-sans: 'Lardy Sans', Verdana, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--pictet-bg);
+  color: var(--pictet-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button:not([disabled]),
+.mat-mdc-button-base:not([disabled]) {
+  cursor: pointer !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--pictet-navy);
+  margin-top: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Angular Material Component Overrides for Pictet Aesthetics */
+
+/* Toolbar */
+.mat-toolbar.mat-primary {
+  background-color: var(--pictet-navy) !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid var(--pictet-gold);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Cards */
+.mat-mdc-card {
+  background-color: var(--pictet-surface) !important;
+  border: 1px solid var(--pictet-border) !important;
+  border-radius: var(--pictet-radius) !important;
+  box-shadow: var(--pictet-shadow) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mat-mdc-card-title {
+  font-family: var(--font-serif) !important;
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
+  color: var(--pictet-navy) !important;
+}
+
+.mat-mdc-card-subtitle {
+  font-family: var(--font-sans) !important;
+  color: var(--pictet-text-muted) !important;
+  font-size: 0.88rem !important;
+  font-weight: 400 !important;
+}
+
+/* Buttons */
+.mat-mdc-button, .mat-mdc-outlined-button, .mat-mdc-unelevated-button, .mat-mdc-raised-button {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-size: 0.78rem !important;
+  border-radius: 4px !important;
+  padding: 0 20px !important;
+  height: 40px !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Primary Flat Buttons (Gold Accent) */
+.mat-mdc-unelevated-button.mat-primary, .mat-mdc-raised-button.mat-primary {
+  background-color: var(--pictet-navy) !important;
+  color: #ffffff !important;
+
+  &:hover {
+    background-color: var(--pictet-navy-light) !important;
+  }
+}
+
+/* Accent Buttons */
+.mat-mdc-unelevated-button.mat-accent, .mat-mdc-raised-button.mat-accent, .mat-mdc-flat-button.mat-accent {
+  background-color: var(--pictet-gold) !important;
+  color: var(--pictet-navy) !important;
+
+  &:hover {
+    background-color: var(--pictet-gold-hover) !important;
+  }
+}
+
+/* Stroked Buttons */
+.mat-mdc-outlined-button.mat-primary {
+  border-color: var(--pictet-navy) !important;
+  color: var(--pictet-navy) !important;
+
+  &:hover {
+    background-color: var(--pictet-gold-light) !important;
+    border-color: var(--pictet-gold) !important;
+  }
+}
+
+/* Chips */
+.mat-mdc-standard-chip {
+  background-color: var(--pictet-gold-light) !important;
+  border: 1px solid var(--pictet-border) !important;
+  color: var(--pictet-navy) !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+}
+
+/* Form Fields & Inputs */
+.mat-mdc-form-field {
+  font-family: var(--font-sans) !important;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline__leading,
+.mdc-text-field--outlined .mdc-notched-outline__notch,
+.mdc-text-field--outlined .mdc-notched-outline__trailing {
+  border-color: var(--pictet-border) !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: var(--pictet-gold) !important;
+  border-width: 2px !important;
+}
+
+/* Progress Bar */
+.mat-mdc-progress-bar {
+  border-radius: 4px !important;
+  height: 8px !important;
+
+  .mdc-linear-progress__buffer-bar {
+    background-color: #E2DFD7 !important;
+  }
+
+  .mdc-linear-progress__bar-inner {
+    border-color: var(--pictet-gold) !important;
+  }
+}
+
+/* Dialog Container */
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: var(--pictet-radius) !important;
+  border: 1px solid var(--pictet-border) !important;
+  box-shadow: 0 20px 50px rgba(11, 37, 38, 0.2) !important;
+}

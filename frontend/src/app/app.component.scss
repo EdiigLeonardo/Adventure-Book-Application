@@ -1,0 +1,114 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--pictet-bg, #f5f4f0);
+}
+
+.pictet-header {
+  background-color: var(--pictet-bg, #f7f3e9);
+  border-bottom: 2px solid var(--pictet-gold, #c5a059);
+  color: var(--pictet-navy, #0b2526);
+  padding: 16px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.pictet-header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  max-width: 30%;
+  object-fit: cover;
+
+  img {
+    height: 38px;
+    width: auto;
+    object-fit: cover;
+  }
+}
+
+.brand-divider {
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+  background-color: var(--pictet-gold, #c5a059);
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #344847;
+  text-transform: uppercase;
+}
+
+.header-tagline {
+  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: #705315;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+.sidebar,
+.game-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.empty-card {
+  padding: 24px;
+
+  .empty-title {
+    font-family: var(--font-serif, "Cormorant Garamond", serif);
+    font-size: 1.6rem;
+    color: var(--pictet-navy, #0b2526);
+    margin-bottom: 8px;
+  }
+
+  .empty-text {
+    font-size: 0.95rem;
+    color: var(--pictet-text-muted, #5d6a69);
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 920px) {
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .header-tagline {
+    display: none;
+  }
+}

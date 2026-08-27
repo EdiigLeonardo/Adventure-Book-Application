@@ -1,0 +1,26 @@
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+
+import { Book } from '../../core/models/book.model';
+
+@Component({
+  selector: 'app-book-catalog',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatIconModule, MatListModule],
+  templateUrl: './book-catalog.component.html',
+  styleUrl: './book-catalog.component.scss',
+})
+export class BookCatalogComponent {
+  @Input() books: Book[] = [];
+  @Input() selectedBookId: string | null = null;
+
+  @Output() bookSelected = new EventEmitter<Book>();
+
+  selectBook(book: Book): void {
+    this.bookSelected.emit(book);
+  }
+}

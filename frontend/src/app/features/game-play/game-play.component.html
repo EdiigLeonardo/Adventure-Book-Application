@@ -1,0 +1,133 @@
+<mat-card *ngIf="book" class="book-card">
+  <mat-card-header>
+    <mat-card-title class="editorial-title">{{ book.title }}</mat-card-title>
+    <mat-card-subtitle>{{
+      book.description ?? "No description provided."
+    }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="book-meta">
+      <mat-chip-set class="pictet-chips">
+        <mat-chip>{{ book.difficulty ?? "Standard" }}</mat-chip>
+        <mat-chip>{{ book.sections.length }} scenes total</mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <div class="action-row">
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="start()"
+        [disabled]="!book"
+        class="start-button"
+      >
+        Begin Adventure
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="session" class="game-card">
+  <mat-card-header>
+    <div class="header-content">
+      <mat-card-title class="editorial-title">Current Scene</mat-card-title>
+      <span
+        class="session-badge"
+        [ngClass]="{
+          'status-progress': session.status === 'IN_PROGRESS',
+          'status-victory': session.status === 'VICTORY',
+          'status-gameover': session.status === 'GAME_OVER'
+        }"
+      >
+        {{ session.status }}
+      </span>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="health-section">
+      <div class="status-row">
+        <span class="health-label">Health Status</span>
+        <strong class="health-value">{{ session.health }} / 10 HP</strong>
+      </div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="healthPercent"
+        class="pictet-health-bar"
+      ></mat-progress-bar>
+    </div>
+
+    <div class="scene-text" *ngIf="currentSection as current">
+      <div class="narrative-box">
+        <p class="narrative-paragraph">{{ current.text }}</p>
+      </div>
+
+      <div
+        class="choices-container"
+        *ngIf="current.options && current.options.length; else sceneEnding"
+      >
+        <h4 id="choices-title-id" class="choices-title">Available Decisions</h4>
+        <div class="choices" role="group" aria-labelledby="choices-title-id">
+          <button
+            type="button"
+            mat-outlined-button
+            color="primary"
+            *ngFor="let option of current.options; let i = index"
+            (click)="pickOption(option)"
+            [disabled]="
+              session.status === 'GAME_OVER' || session.status === 'VICTORY'
+            "
+            class="choice-button"
+            [attr.aria-label]="'Option ' + (i + 1) + ': ' + (option.description || option.text)"
+          >
+            <span class="choice-number" aria-hidden="true">{{ i + 1 }}</span>
+            <span class="choice-text">{{ option.description || option.text }}</span>
+          </button>
+        </div>
+      </div>
+
+      <ng-template #sceneEnding>
+        <div class="ending-box" [ngClass]="session.status.toLowerCase()">
+          <h3 class="ending-title">
+            {{ session.status === 'VICTORY' ? 'Victory Reached' : session.status === 'GAME_OVER' ? 'Defeat' : 'End of Chapter' }}
+          </h3>
+          <p class="ending-desc">
+            {{ session.status === 'VICTORY' ? 'You have successfully completed this interactive quest.' : session.status === 'GAME_OVER' ? 'Your journey has ended. Restart to try a new path.' : 'This pathway has reached its final section.' }}
+          </p>
+        </div>
+      </ng-template>
+    </div>
+
+    <mat-divider class="card-divider"></mat-divider>
+
+    <div class="session-actions">
+      <button
+        mat-outlined-button
+        color="primary"
+        (click)="save()"
+        [disabled]="isSaving"
+      >
+        {{ isSaving ? "Saving Progress..." : "Quick Save" }}
+      </button>
+
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="openSaveResumeDialog('save')"
+      >
+        Manage Save / Resume
+      </button>
+    </div>
+
+    <div class="history" *ngIf="session.history && session.history.length">
+      <h4 class="history-title">Story Log & Audit History</h4>
+      <div class="history-log">
+        <div *ngFor="let historyItem of session.history; let i = index" class="log-item">
+          <span class="log-step">#{{ i + 1 }}</span>
+          <span class="log-text">{{ historyItem }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
