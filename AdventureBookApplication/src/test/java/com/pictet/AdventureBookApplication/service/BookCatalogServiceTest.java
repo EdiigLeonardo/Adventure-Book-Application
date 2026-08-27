@@ -78,11 +78,14 @@ class BookCatalogServiceTest {
     }
 
     @Test
-    void findAll_filterByDifficulty_returnsFiltered() {
-        List<Book> result = catalogService.findAll(null, "EASY", null);
+    void findAll_filterByAdvancedDifficulty_includesEveryNonBeginnerOrIntermediateBook() {
+        List<Book> result = catalogService.findAll(null, "ADVANCED", null);
 
-        assertThat(result).extracting(Book::getId).contains("book-b");
-        assertThat(result).extracting(Book::getId).doesNotContain("book-a");
+        assertThat(result).extracting(Book::getId).contains("book-a", "book-b");
+        assertThat(result.stream()
+            .filter(book -> book.getId().equals("book-a") || book.getId().equals("book-b"))
+            .map(Book::getDifficulty))
+            .containsOnly("ADVANCED");
     }
 
     @Test
@@ -136,6 +139,7 @@ class BookCatalogServiceTest {
 
         assertThat(saved).isNotNull();
         assertThat(saved.getId()).isEqualTo("book-new");
+        assertThat(saved.getDifficulty()).isEqualTo("ADVANCED");
         assertThat(saved.getStatus()).isEqualTo("VALID");
         assertThat(catalogService.findById("book-new")).isNotNull();
     }

@@ -34,8 +34,21 @@ describe('BookCatalogComponent', () => {
 
   it('should render the catalog title, search prompt and selected book name', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Adventure library');
-    expect(compiled.textContent).toContain('Search library');
+    expect(compiled.textContent).toContain('The Adventure Library');
+    expect(compiled.querySelector('#book-search')?.getAttribute('placeholder')).toBe('Search adventures...');
     expect(compiled.textContent).toContain('The Whispering Keep');
+  });
+
+  it('emits the API difficulty value when a difficulty filter is selected', () => {
+    const values: string[] = [];
+    component.difficultyChanged.subscribe(value => values.push(value));
+
+    const catalog = fixture.nativeElement as HTMLElement;
+    const beginnerFilter = Array.from(catalog.querySelectorAll<HTMLButtonElement>('.filter'))
+      .find(button => button.textContent?.trim() === 'Beginner');
+    beginnerFilter?.click();
+
+    expect(component.activeDifficulty).toBe('BEGINNER');
+    expect(values).toEqual(['BEGINNER']);
   });
 });

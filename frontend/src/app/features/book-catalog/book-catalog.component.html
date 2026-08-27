@@ -14,7 +14,7 @@
     <span class="search-hint">⌘ K</span>
   </div>
   <div class="filter-row" aria-label="Library filters">
-    <span>Filter:</span><button type="button" class="filter" [class.active]="activeDifficulty === 'ALL'" (click)="setDifficulty('ALL')">All stories</button><button type="button" class="filter" [class.active]="activeDifficulty === 'Beginner'" (click)="setDifficulty('Beginner')">Beginner</button><button type="button" class="filter" [class.active]="activeDifficulty === 'Intermediate'" (click)="setDifficulty('Intermediate')">Intermediate</button><button type="button" class="filter" [class.active]="activeDifficulty === 'Advanced'" (click)="setDifficulty('Advanced')">Advanced</button>
+    <span>Filter:</span><button type="button" class="filter" [class.active]="activeDifficulty === 'ALL'" (click)="setDifficulty('ALL')">All stories</button><button type="button" class="filter" [class.active]="activeDifficulty === 'BEGINNER'" (click)="setDifficulty('BEGINNER')">Beginner</button><button type="button" class="filter" [class.active]="activeDifficulty === 'INTERMEDIATE'" (click)="setDifficulty('INTERMEDIATE')">Intermediate</button><button type="button" class="filter" [class.active]="activeDifficulty === 'ADVANCED'" (click)="setDifficulty('ADVANCED')">Advanced</button>
   </div>
   <div class="book-grid">
     <article class="book-entry" *ngFor="let book of books; let i = index" (click)="selectBook(book)" [class.active]="selectedBookId === book.id">

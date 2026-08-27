@@ -20,8 +20,8 @@ describe('BookUploadComponent', () => {
 
   it('should display a polished upload prompt and action text', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Upload a story');
-    expect(compiled.textContent).toContain('Drop a JSON adventure file');
-    expect(compiled.textContent).toContain('Choose JSON book');
+    expect(compiled.textContent).toContain('Publish New Adventure');
+    expect(compiled.textContent).toContain('Click to select JSON file');
+    expect(compiled.textContent).toContain('Select Adventure File');
   });
 });

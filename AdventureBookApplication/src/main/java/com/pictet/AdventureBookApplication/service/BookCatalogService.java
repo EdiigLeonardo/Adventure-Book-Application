@@ -36,7 +36,8 @@ public class BookCatalogService {
     public List<Book> findAll(String query, String difficulty, String status) {
         return booksById.values().stream()
             .filter(book -> query == null || query.isBlank() || containsQuery(book, query))
-            .filter(book -> difficulty == null || difficulty.isBlank() || Objects.equals(book.getDifficulty(), difficulty))
+            .filter(book -> difficulty == null || difficulty.isBlank()
+                || Objects.equals(book.getDifficulty(), difficulty.trim().toUpperCase(java.util.Locale.ROOT)))
             .filter(book -> status == null || status.isBlank() || Objects.equals(book.getStatus(), status))
             .collect(Collectors.toList());
     }
@@ -50,6 +51,7 @@ public class BookCatalogService {
         if (!validationResult.isValid()) {
             throw new IllegalArgumentException(String.join("; ", validationResult.getErrors()));
         }
+        normalizeDifficulty(book);
         book.setStatus("VALID");
         booksById.put(book.getId(), book);
         return book;
@@ -81,6 +83,7 @@ public class BookCatalogService {
                         if (book == null || book.getId() == null || book.getId().isBlank()) {
                             continue;
                         }
+                        normalizeDifficulty(book);
                         ValidationResult validationResult = validatorService.validate(book);
                         book.setStatus(validationResult.isValid() ? "VALID" : "INVALID");
                         booksById.put(book.getId(), book);
@@ -100,5 +103,15 @@ public class BookCatalogService {
         return (book.getTitle() != null && book.getTitle().toLowerCase().contains(q))
             || (book.getDescription() != null && book.getDescription().toLowerCase().contains(q))
             || (book.getDifficulty() != null && book.getDifficulty().toLowerCase().contains(q));
+    }
+
+    private void normalizeDifficulty(Book book) {
+        if ("BEGINNER".equalsIgnoreCase(book.getDifficulty())) {
+            book.setDifficulty("BEGINNER");
+        } else if ("INTERMEDIATE".equalsIgnoreCase(book.getDifficulty())) {
+            book.setDifficulty("INTERMEDIATE");
+        } else {
+            book.setDifficulty("ADVANCED");
+        }
     }
 }
