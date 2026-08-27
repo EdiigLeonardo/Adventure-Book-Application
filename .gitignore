@@ -25,4 +25,8 @@ replay_pid*
 
 .env
 node_modules/
+target/
+.angular/
+dist/
+.vscode/
 
