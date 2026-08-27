@@ -4,7 +4,7 @@ export type GameStatus = 'IN_PROGRESS' | 'VICTORY' | 'GAME_OVER';
 
 export interface Consequence {
   type?: 'LOSE_HEALTH' | 'GAIN_HEALTH';
-  value?: string;
+  value?: string | number;
   text?: string;
 }
 

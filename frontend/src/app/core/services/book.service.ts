@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -8,8 +8,11 @@ import { Book, GameSession } from '../models/book.model';
 export class BookService {
   constructor(private readonly http: HttpClient) {}
 
-  listBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>('/api/v1/books');
+  listBooks(query?: string, difficulty?: string): Observable<Book[]> {
+    let params = new HttpParams();
+    if (query?.trim()) params = params.set('query', query.trim());
+    if (difficulty && difficulty !== 'ALL') params = params.set('difficulty', difficulty);
+    return this.http.get<Book[]>('/api/v1/books', { params });
   }
 
   getBook(id: string): Observable<Book> {
