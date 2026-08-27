@@ -31,6 +31,11 @@ export interface Book {
   sections: Section[];
 }
 
+export interface BookUploadResponse {
+  book: Book;
+  warnings?: string[];
+}
+
 export interface GameSession {
   id: string;
   bookId: string;

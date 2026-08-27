@@ -35,4 +35,12 @@ class BookMcpToolsRegistrationTest {
         assertTrue(toolNames.contains("getBookDetails"), "Expected getBookDetails tool to be registered");
         assertTrue(toolNames.contains("validateBookJson"), "Expected validateBookJson tool to be registered");
     }
+
+    @Test
+    void getBookDetails_unknownId_throwsException() {
+        BookMcpTools mcpTools = applicationContext.getBean(BookMcpTools.class);
+        org.assertj.core.api.Assertions.assertThatThrownBy(() -> mcpTools.getBookDetails("unknown-book-id"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("No book found with id 'unknown-book-id'");
+    }
 }

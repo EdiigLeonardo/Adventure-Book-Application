@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.Difficulty;
 import com.pictet.AdventureBookApplication.model.Option;
 import com.pictet.AdventureBookApplication.model.Section;
 import com.pictet.AdventureBookApplication.model.SectionType;
@@ -14,6 +15,8 @@ import com.pictet.AdventureBookApplication.validation.ValidationResult;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -78,14 +81,38 @@ class BookCatalogServiceTest {
     }
 
     @Test
-    void findAll_filterByAdvancedDifficulty_includesEveryNonBeginnerOrIntermediateBook() {
-        List<Book> result = catalogService.findAll(null, "ADVANCED", null);
+    void findAll_filterByDifficulty_returnsOnlyMatchingNormalizedDifficulty() {
+        List<Book> resultIntermediate = catalogService.findAll(null, "INTERMEDIATE", null);
+        assertThat(resultIntermediate).extracting(Book::getId).contains("book-a");
 
-        assertThat(result).extracting(Book::getId).contains("book-a", "book-b");
-        assertThat(result.stream()
-            .filter(book -> book.getId().equals("book-a") || book.getId().equals("book-b"))
-            .map(Book::getDifficulty))
-            .containsOnly("ADVANCED");
+        List<Book> resultBeginner = catalogService.findAll(null, "BEGINNER", null);
+        assertThat(resultBeginner).extracting(Book::getId).contains("book-b");
+    }
+
+    @Test
+    void normalizeDifficulty_mapsPictetEasyMediumHard_toCorrectBuckets() {
+        assertThat(Difficulty.normalize("EASY")).isEqualTo(Difficulty.BEGINNER);
+        assertThat(Difficulty.normalize("MEDIUM")).isEqualTo(Difficulty.INTERMEDIATE);
+        assertThat(Difficulty.normalize("HARD")).isEqualTo(Difficulty.ADVANCED);
+    }
+
+    @Test
+    void normalizeDifficulty_unknownValue_throwsInsteadOfDefaultingSilently() {
+        assertThatThrownBy(() -> Difficulty.normalize("NIGHTMARE"))
+            .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"crystal-caverns", "pirates-jade-sea", "the-prisoner"})
+    void loadDefaultBooks_pictetSampleFiles_areLoadedWithDerivedId(String derivedId) {
+        Book book = catalogService.findById(derivedId);
+        assertThat(book).isNotNull();
+        assertThat(book.getId()).isEqualTo(derivedId);
+    }
+
+    @Test
+    void loadDefaultBooks_malformedJsonFile_doesNotPreventApplicationStartup() {
+        assertThat(catalogService.findAll(null, null, null)).isNotEmpty();
     }
 
     @Test

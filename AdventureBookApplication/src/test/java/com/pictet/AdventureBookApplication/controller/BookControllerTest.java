@@ -110,7 +110,8 @@ class BookControllerTest {
 
         mockMvc.perform(multipart("/api/v1/books").file(file))
             .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", is("new-book")));
+            .andExpect(jsonPath("$.book.id", is("new-book")))
+            .andExpect(jsonPath("$.warnings", hasSize(0)));
     }
 
     @Test
@@ -137,7 +138,8 @@ class BookControllerTest {
 
         mockMvc.perform(multipart("/api/v1/books").file(file))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.id", is("existing-book")));
+            .andExpect(jsonPath("$.book.id", is("existing-book")))
+            .andExpect(jsonPath("$.warnings", hasSize(0)));
     }
 
     @Test

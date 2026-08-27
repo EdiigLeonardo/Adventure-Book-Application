@@ -36,7 +36,27 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void { this.destroy$.next(); this.destroy$.complete(); }
   select(book: Book): void { this.ui.setBook(book); }
   start(book: Book): void { this.ui.setBook(book); this.router.navigate(['/game']); }
-  upload(file: File): void { this.isUploading=true; this.booksApi.uploadBook(file).subscribe({next: book => {this.isUploading=false; this.upsertBook(book); this.snack.open('Adventure uploaded.', 'Close',{duration:3000});}, error:()=>{this.isUploading=false; this.snack.open('The book file could not be uploaded.', 'Close',{duration:3000});}}); }
+  upload(file: File): void {
+    this.isUploading = true;
+    this.booksApi.uploadBook(file).subscribe({
+      next: response => {
+        this.isUploading = false;
+        const uploadedBook = response.book;
+        if (uploadedBook) {
+          this.upsertBook(uploadedBook);
+        }
+        const warningCount = response.warnings?.length || 0;
+        const message = warningCount > 0
+          ? `Adventure uploaded with ${warningCount} warning(s).`
+          : 'Adventure uploaded.';
+        this.snack.open(message, 'Close', { duration: 3000 });
+      },
+      error: () => {
+        this.isUploading = false;
+        this.snack.open('The book file could not be uploaded.', 'Close', { duration: 3000 });
+      }
+    });
+  }
 
   private refreshBooks(): void {
     this.filters$.next({ query: this.query, difficulty: this.difficulty });

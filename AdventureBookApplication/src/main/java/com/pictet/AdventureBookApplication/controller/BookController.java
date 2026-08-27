@@ -70,9 +70,15 @@ public class BookController {
 
             Book book = new com.fasterxml.jackson.databind.ObjectMapper().readValue(json, Book.class);
             BookCatalogService.UploadResult result = catalogService.saveUploadedBookIdempotently(book);
-            return ResponseEntity.status(result.created() ? HttpStatus.CREATED : HttpStatus.OK).body(result.book());
+            return ResponseEntity.status(result.created() ? HttpStatus.CREATED : HttpStatus.OK)
+                .body(new BookUploadResponse(result.book(), validationResult.getWarnings()));
         } catch (IOException ex) {
             throw new IllegalArgumentException("Unable to parse the uploaded JSON file.", ex);
         }
     }
+
+    public record BookUploadResponse(
+        Book book,
+        List<String> warnings
+    ) {}
 }

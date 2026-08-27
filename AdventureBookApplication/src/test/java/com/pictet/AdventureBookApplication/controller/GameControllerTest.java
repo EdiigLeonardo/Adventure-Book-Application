@@ -76,6 +76,19 @@ class GameControllerTest {
             .andExpect(status().isNotFound());
     }
 
+    @Test
+    void startGame_withInvalidBook_returnsConflict() throws Exception {
+        Book invalidBook = buildBook("invalid-book");
+        invalidBook.setStatus("INVALID");
+
+        when(catalogService.findById("invalid-book")).thenReturn(invalidBook);
+
+        mockMvc.perform(post("/api/v1/games/start")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(Map.of("bookId", "invalid-book"))))
+            .andExpect(status().isConflict());
+    }
+
     // ── POST /api/v1/games/{id}/choose ────────────────────────────────────
 
     @Test

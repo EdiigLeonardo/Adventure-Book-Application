@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Book, GameSession } from '../models/book.model';
+import { Book, BookUploadResponse, GameSession } from '../models/book.model';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
@@ -37,9 +37,9 @@ export class BookService {
     return this.http.get<GameSession>(`/api/v1/games/${sessionId}/resume`);
   }
 
-  uploadBook(file: File): Observable<Book> {
+  uploadBook(file: File): Observable<BookUploadResponse> {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<Book>('/api/v1/books', formData);
+    return this.http.post<BookUploadResponse>('/api/v1/books', formData);
   }
 }

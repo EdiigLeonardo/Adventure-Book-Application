@@ -3,6 +3,7 @@ package com.pictet.AdventureBookApplication.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pictet.AdventureBookApplication.model.Book;
+import com.pictet.AdventureBookApplication.model.Difficulty;
 import com.pictet.AdventureBookApplication.validation.BookValidatorService;
 import com.pictet.AdventureBookApplication.validation.ValidationResult;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -90,12 +92,17 @@ public class BookCatalogService {
                     }
 
                     for (Book book : books) {
-                        if (book == null || book.getId() == null || book.getId().isBlank()) {
+                        if (book == null) {
                             continue;
+                        }
+                        if (book.getId() == null || book.getId().isBlank()) {
+                            String derivedId = slugify(resource.getFilename());
+                            book.setId(derivedId);
+                            log.info("Book '{}' has no explicit id — derived '{}' from filename", book.getTitle(), derivedId);
                         }
                         normalizeDifficulty(book);
                         ValidationResult validationResult = validatorService.validate(book);
-                        book.setStatus(validationResult.isValid() ? "VALID" : "INVALID");
+                        book.setStatus(validationResult != null && validationResult.isValid() ? "VALID" : "INVALID");
                         booksById.put(book.getId(), book);
                     }
                 } catch (Exception ex) {
@@ -108,6 +115,17 @@ public class BookCatalogService {
         }
     }
 
+    private String slugify(String filename) {
+        if (filename == null) {
+            throw new IllegalStateException("Cannot derive book id: resource has no filename");
+        }
+        return filename
+            .replaceFirst("\\.json$", "")
+            .toLowerCase(Locale.ROOT)
+            .replaceAll("[^a-z0-9]+", "-")
+            .replaceAll("(^-|-$)", "");
+    }
+
     private boolean containsQuery(Book book, String query) {
         String q = query.toLowerCase();
         return (book.getTitle() != null && book.getTitle().toLowerCase().contains(q))
@@ -116,13 +134,11 @@ public class BookCatalogService {
     }
 
     private void normalizeDifficulty(Book book) {
-        if ("BEGINNER".equalsIgnoreCase(book.getDifficulty())) {
-            book.setDifficulty("BEGINNER");
-        } else if ("INTERMEDIATE".equalsIgnoreCase(book.getDifficulty())) {
-            book.setDifficulty("INTERMEDIATE");
-        } else {
-            book.setDifficulty("ADVANCED");
+        if (book == null || book.getDifficulty() == null || book.getDifficulty().isBlank()) {
+            throw new IllegalArgumentException("Difficulty value is missing");
         }
+        Difficulty normalized = Difficulty.normalize(book.getDifficulty());
+        book.setDifficulty(normalized.name());
     }
 
     public record UploadResult(Book book, boolean created) {}

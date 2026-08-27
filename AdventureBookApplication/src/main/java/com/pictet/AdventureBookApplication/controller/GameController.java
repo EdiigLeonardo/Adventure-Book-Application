@@ -40,6 +40,10 @@ public class GameController {
             return ResponseEntity.notFound().build();
         }
 
+        if (!"VALID".equalsIgnoreCase(book.getStatus())) {
+            throw new IllegalStateException("Cannot start a game with an invalid book: " + bookId);
+        }
+
         GameSession session = gameEngineService.startGame(book);
         GameSession saved = gameSessionRepository.save(session);
         return ResponseEntity.ok(saved);

@@ -24,9 +24,13 @@ public class BookMcpTools {
         return catalogService.findAll(null, difficulty, status);
     }
 
-    @Tool(description = "Return the complete details of a specific book")
+    @Tool(description = "Get full details of a book by its id")
     public Book getBookDetails(String bookId) {
-        return catalogService.findById(bookId);
+        Book book = catalogService.findById(bookId);
+        if (book == null) {
+            throw new IllegalArgumentException("No book found with id '" + bookId + "'. Use listBooks to see available ids.");
+        }
+        return book;
     }
 
     @Tool(description = "Validate a raw JSON adventure book before publishing it")
