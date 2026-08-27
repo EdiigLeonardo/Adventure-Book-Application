@@ -5,7 +5,7 @@ h2 { margin:0 0 6px; color:#594537; font: 500 2rem/1.1 Georgia, serif; }
 .catalog-heading p { margin:0; color:#88766a; font-size:.83rem; }
 .library-count { color:#a29185; font-size:.76rem; text-transform:uppercase; letter-spacing:.12em; }
 .search-box { display:flex; align-items:center; gap:10px; background:#fffdfa; border:1px solid #e6ddd4; border-radius:6px; padding:10px 14px; box-shadow:0 4px 14px rgba(87,62,47,.04); }
-.search-box mat-icon { color:#b29a88; font-size:19px; }
+.search-icon { width:18px; height:18px; flex:0 0 18px; fill:none; stroke:#b29a88; stroke-width:1.8; stroke-linecap:round; }
 .search-box input { border:0; outline:0; flex:1; background:transparent; font: .8rem 'Trebuchet MS', sans-serif; color:#5b493e; }
 .search-box input::placeholder { color:#b3a59c; }
 .search-hint { color:#b7aaa1; font-size:.7rem; border:1px solid #e6ddd4; border-radius:4px; padding:2px 6px; }
