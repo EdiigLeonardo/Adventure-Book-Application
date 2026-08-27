@@ -16,9 +16,13 @@ import java.util.stream.Collectors;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class BookCatalogService {
+
+    private static final Logger log = LoggerFactory.getLogger(BookCatalogService.class);
 
     private final Map<String, Book> booksById = new LinkedHashMap<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -81,8 +85,9 @@ public class BookCatalogService {
                         book.setStatus(validationResult.isValid() ? "VALID" : "INVALID");
                         booksById.put(book.getId(), book);
                     }
-                } catch (Exception ignored) {
-                    // Ignore unreadable / empty sample files and continue booting the app.
+                } catch (Exception ex) {
+                    // Keep the application running, but make malformed user-provided resources observable.
+                    log.warn("Unable to load book resource {}: {}", resource.getDescription(), ex.getMessage());
                 }
             }
         } catch (IOException e) {
