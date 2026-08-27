@@ -1,0 +1,29 @@
+[
+  {
+    "id": "garden-of-echoes",
+    "title": "Garden of Echoes",
+    "difficulty": "easy",
+    "description": "A quiet garden hides a series of choices that shape your fate.",
+    "sections": [
+      {
+        "id": "1",
+        "type": "BEGIN",
+        "text": "You stand in a moonlit garden. A brass gate glints ahead.",
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Open the gate and walk inside.",
+            "gotoId": "2",
+            "consequence": { "type": "GAIN_HEALTH", "value": 1 }
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "END",
+        "text": "The garden reveals a secret spring and you win the night.",
+        "options": []
+      }
+    ]
+  }
+]

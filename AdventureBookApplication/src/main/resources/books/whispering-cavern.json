@@ -1,0 +1,48 @@
+[
+  {
+    "id": "whispering-cavern",
+    "title": "Whispering Cavern",
+    "difficulty": "medium",
+    "description": "A cavern of echoes where every step can cost health.",
+    "sections": [
+      {
+        "id": "1",
+        "type": "BEGIN",
+        "text": "You enter the cavern and hear a whisper from the dark.",
+        "options": [
+          {
+            "id": "opt-1",
+            "text": "Follow the whisper north.",
+            "gotoId": "2",
+            "consequence": { "type": "LOSE_HEALTH", "value": 2 }
+          },
+          {
+            "id": "opt-2",
+            "text": "Stay near the lantern and walk east.",
+            "gotoId": "3",
+            "consequence": { "type": "GAIN_HEALTH", "value": 1 }
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "type": "NODE",
+        "text": "The corridor narrows and a stone wolf watches you.",
+        "options": [
+          {
+            "id": "opt-3",
+            "text": "Calm the wolf with a song.",
+            "gotoId": "3",
+            "consequence": { "type": "GAIN_HEALTH", "value": 2 }
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "type": "END",
+        "text": "You step into the crystal chamber and the cave whispers your name.",
+        "options": []
+      }
+    ]
+  }
+]
