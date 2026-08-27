@@ -145,6 +145,20 @@ class BookCatalogServiceTest {
     }
 
     @Test
+    void saveUploadedBookIdempotently_returnsExistingBookForAnIdenticalUpload() {
+        Book firstUpload = buildBook("duplicate-book", "Duplicate", "EASY", null);
+        Book repeatedUpload = buildBook("duplicate-book", "Duplicate", "EASY", null);
+
+        BookCatalogService.UploadResult first = catalogService.saveUploadedBookIdempotently(firstUpload);
+        BookCatalogService.UploadResult repeated = catalogService.saveUploadedBookIdempotently(repeatedUpload);
+
+        assertThat(first.created()).isTrue();
+        assertThat(repeated.created()).isFalse();
+        assertThat(repeated.book()).isSameAs(first.book());
+        assertThat(catalogService.findAll("Duplicate", null, null)).hasSize(1);
+    }
+
+    @Test
     void saveUploadedBook_invalidBook_throwsIllegalArgumentException() {
         Book invalidBook = buildBook("bad-book", "Invalid", "HARD", null);
         ValidationResult invalid = new ValidationResult();

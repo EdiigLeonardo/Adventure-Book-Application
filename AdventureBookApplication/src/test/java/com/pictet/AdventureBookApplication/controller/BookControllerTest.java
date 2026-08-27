@@ -101,7 +101,8 @@ class BookControllerTest {
 
         ValidationResult valid = new ValidationResult();
         when(validatorService.validateRawJson(anyString())).thenReturn(valid);
-        when(catalogService.saveUploadedBook(any())).thenAnswer(inv -> inv.getArgument(0));
+        when(catalogService.saveUploadedBookIdempotently(any()))
+            .thenAnswer(inv -> new BookCatalogService.UploadResult(inv.getArgument(0), true));
 
         MockMultipartFile file = new MockMultipartFile(
             "file", "book.json", MediaType.APPLICATION_JSON_VALUE, json.getBytes()
@@ -110,6 +111,33 @@ class BookControllerTest {
         mockMvc.perform(multipart("/api/v1/books").file(file))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", is("new-book")));
+    }
+
+    @Test
+    void uploadBook_withAnIdenticalBook_returnsOk() throws Exception {
+        String json = """
+            {
+              "id": "existing-book",
+              "title": "Existing Adventure",
+              "sections": [
+                {"id":"1","type":"BEGIN","text":"Go","options":[{"description":"Forward","gotoId":"2"}]},
+                {"id":"2","type":"END","text":"Done"}
+              ]
+            }
+            """;
+
+        ValidationResult valid = new ValidationResult();
+        when(validatorService.validateRawJson(anyString())).thenReturn(valid);
+        when(catalogService.saveUploadedBookIdempotently(any()))
+            .thenAnswer(inv -> new BookCatalogService.UploadResult(inv.getArgument(0), false));
+
+        MockMultipartFile file = new MockMultipartFile(
+            "file", "book.json", MediaType.APPLICATION_JSON_VALUE, json.getBytes()
+        );
+
+        mockMvc.perform(multipart("/api/v1/books").file(file))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id", is("existing-book")));
     }
 
     @Test

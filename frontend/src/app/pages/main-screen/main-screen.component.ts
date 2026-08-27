@@ -36,9 +36,16 @@ export class MainScreenComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void { this.destroy$.next(); this.destroy$.complete(); }
   select(book: Book): void { this.ui.setBook(book); }
   start(book: Book): void { this.ui.setBook(book); this.router.navigate(['/game']); }
-  upload(file: File): void { this.isUploading=true; this.booksApi.uploadBook(file).subscribe({next: book => {this.isUploading=false; this.books=[...this.books,book]; this.snack.open('Adventure uploaded.', 'Close',{duration:3000});}, error:()=>{this.isUploading=false; this.snack.open('The book file could not be uploaded.', 'Close',{duration:3000});}}); }
+  upload(file: File): void { this.isUploading=true; this.booksApi.uploadBook(file).subscribe({next: book => {this.isUploading=false; this.upsertBook(book); this.snack.open('Adventure uploaded.', 'Close',{duration:3000});}, error:()=>{this.isUploading=false; this.snack.open('The book file could not be uploaded.', 'Close',{duration:3000});}}); }
 
   private refreshBooks(): void {
     this.filters$.next({ query: this.query, difficulty: this.difficulty });
+  }
+
+  private upsertBook(book: Book): void {
+    const index = this.books.findIndex(existing => existing.id === book.id);
+    this.books = index === -1
+      ? [...this.books, book]
+      : this.books.map(existing => existing.id === book.id ? book : existing);
   }
 }

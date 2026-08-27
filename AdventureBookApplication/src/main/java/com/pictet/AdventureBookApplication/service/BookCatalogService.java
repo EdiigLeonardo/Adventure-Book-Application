@@ -47,14 +47,24 @@ public class BookCatalogService {
     }
 
     public Book saveUploadedBook(Book book) {
+        return saveUploadedBookIdempotently(book).book();
+    }
+
+    public synchronized UploadResult saveUploadedBookIdempotently(Book book) {
         ValidationResult validationResult = validatorService.validate(book);
         if (!validationResult.isValid()) {
             throw new IllegalArgumentException(String.join("; ", validationResult.getErrors()));
         }
         normalizeDifficulty(book);
         book.setStatus("VALID");
+
+        Book existing = booksById.get(book.getId());
+        if (existing != null && objectMapper.valueToTree(existing).equals(objectMapper.valueToTree(book))) {
+            return new UploadResult(existing, false);
+        }
+
         booksById.put(book.getId(), book);
-        return book;
+        return new UploadResult(book, existing == null);
     }
 
     private void loadDefaultBooks() {
@@ -114,4 +124,6 @@ public class BookCatalogService {
             book.setDifficulty("ADVANCED");
         }
     }
+
+    public record UploadResult(Book book, boolean created) {}
 }
