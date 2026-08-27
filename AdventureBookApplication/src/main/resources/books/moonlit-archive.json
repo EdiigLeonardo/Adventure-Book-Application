@@ -17,6 +17,14 @@
         {
           "description": "Read the visitor log",
           "gotoId": "3"
+        },
+        {
+          "description": "Enter the forbidden vault without a light",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -164,6 +172,11 @@
       "id": "12",
       "type": "END",
       "text": "The archive returns the lost history."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The vault seals behind you, leaving the archive undisturbed."
     }
   ]
 }

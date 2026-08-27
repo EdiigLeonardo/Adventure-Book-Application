@@ -17,6 +17,14 @@
         {
           "description": "Visit the fishermen",
           "gotoId": "3"
+        },
+        {
+          "description": "Dive into the whirlpool unprepared",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -160,6 +168,11 @@
       "id": "12",
       "type": "END",
       "text": "The drowned road becomes a bridge."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The current pulls you below the drowned road before you reach safety."
     }
   ]
 }

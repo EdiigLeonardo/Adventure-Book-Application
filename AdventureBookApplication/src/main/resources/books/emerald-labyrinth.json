@@ -17,6 +17,14 @@
         {
           "description": "Mark the entrance",
           "gotoId": "3"
+        },
+        {
+          "description": "Cut through the closing thorn wall",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -164,6 +172,11 @@
       "id": "12",
       "type": "END",
       "text": "The emerald moon remembers your name."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The thorns close around you, and the living maze falls silent."
     }
   ]
 }

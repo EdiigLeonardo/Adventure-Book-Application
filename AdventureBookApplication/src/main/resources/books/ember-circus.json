@@ -17,6 +17,14 @@
         {
           "description": "Follow the acrobats",
           "gotoId": "3"
+        },
+        {
+          "description": "Walk into the fire ring alone",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -160,6 +168,11 @@
       "id": "12",
       "type": "END",
       "text": "The phoenix joins the final parade."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The flames overwhelm you before the performance can be saved."
     }
   ]
 }

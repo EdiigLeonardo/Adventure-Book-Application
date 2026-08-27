@@ -17,6 +17,14 @@
         {
           "description": "Anchor near the cliffs",
           "gotoId": "3"
+        },
+        {
+          "description": "Swim through the shattered mirrors",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -156,6 +164,11 @@
       "id": "12",
       "type": "END",
       "text": "The reef reveals its oldest secret."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The broken reflections pull you into the reef's freezing depths."
     }
   ]
 }

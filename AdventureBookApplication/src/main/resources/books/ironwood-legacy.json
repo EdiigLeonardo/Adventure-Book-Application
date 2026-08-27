@@ -17,6 +17,14 @@
         {
           "description": "Climb the watch tree",
           "gotoId": "3"
+        },
+        {
+          "description": "Challenge the sleeping guardian with an axe",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -156,6 +164,11 @@
       "id": "12",
       "type": "END",
       "text": "The guardian names you its warden."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The guardian's roots bind you before the forest can be restored."
     }
   ]
 }

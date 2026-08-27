@@ -21,6 +21,14 @@
             "type": "LOSE_HEALTH",
             "value": 1
           }
+        },
+        {
+          "description": "Fly straight into the storm",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -164,6 +172,11 @@
       "id": "12",
       "type": "END",
       "text": "Your airship becomes a legend."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The storm tears the airship from its course before it can reach an island."
     }
   ]
 }

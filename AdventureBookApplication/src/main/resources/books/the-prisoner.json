@@ -42,6 +42,15 @@
         {
           "description": "Try to open the door with the key",
           "gotoId": 1000
+        },
+        {
+          "description": "Force the rusty key into the lock",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": "4",
+            "text": "The key snaps and cuts deeply into your hand. You collapse before the door opens."
+          }
         }
       ]
     },
@@ -64,6 +73,11 @@
     {
       "id": "1000",
       "text": "The door opens. You are now free...",
+      "type": "END"
+    },
+    {
+      "id": "game-over",
+      "text": "Your strength gives out in the darkness. The prison remains closed.",
       "type": "END"
     },
     {

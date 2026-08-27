@@ -21,6 +21,14 @@
         {
           "description": "Find a windward route",
           "gotoId": "3"
+        },
+        {
+          "description": "Walk into the lava flow",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -164,6 +172,11 @@
       "id": "12",
       "type": "END",
       "text": "The mountain settles under a new moon."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The heat overwhelms you long before you can reach the crown."
     }
   ]
 }

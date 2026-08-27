@@ -17,6 +17,14 @@
         {
           "description": "Follow the river",
           "gotoId": "3"
+        },
+        {
+          "description": "Step into the dark current",
+          "gotoId": "game-over",
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 10
+          }
         }
       ]
     },
@@ -156,6 +164,11 @@
       "id": "12",
       "type": "END",
       "text": "Every lost spirit finds its way."
+    },
+    {
+      "id": "game-over",
+      "type": "END",
+      "text": "The river carries you beyond the lanterns' light."
     }
   ]
 }
