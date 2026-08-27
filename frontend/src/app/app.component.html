@@ -1,21 +1,29 @@
-<header class="pictet-header" role="banner" aria-label="Pictet Application Header">
+<!-- THESIS: An editorial field guide for choosing and entering interactive stories, refusing the dashboard grid. OWN-WORLD: ink brown, parchment, saffron, and quiet serif typography with tactile rules. STORY: discover a tale, understand its promise, and enter it in one deliberate action. FIRST VIEWPORT: a story-led masthead, library title, search/filter rail, then three generous book entries. FORM: editorial catalogue, position 1, adapted from the supplied references. FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md -->
+<header class="pictet-header" role="banner" aria-label="Adventure Awaits header">
   <div class="pictet-header-container">
     <div class="brand-badge">
       <div class="brand-logo">
         <img class="logo1" src="logo_1.svg" alt="Pictet">
       </div>
       <span class="brand-divider" aria-hidden="true"></span>
-      <span class="brand-subtitle">Interactive Adventure Engine</span>
+      <span class="brand-subtitle">Interactive story library</span>
     </div>
   </div>
 </header>
 
-<div class="layout">
-  <aside class="sidebar">
+<section class="hero-intro" *ngIf="!session">
+  <div class="hero-stars" aria-hidden="true">✦ &nbsp;✦ &nbsp;✦</div>
+  <h1>Adventure Awaits</h1>
+  <p>Embark on epic quests where every choice shapes your destiny.<br />Explore mystical realms, solve ancient mysteries, and become the hero of your own story.</p>
+</section>
+
+<main class="layout" [class.play-layout]="!!session">
+  <aside class="sidebar" *ngIf="!session">
     <app-book-catalog
       [books]="books"
       [selectedBookId]="selectedBook?.id ?? null"
       (bookSelected)="selectBook($event)"
+      (adventureStarted)="startAdventure($event)"
     ></app-book-catalog>
 
     <app-book-upload
@@ -24,7 +32,7 @@
     ></app-book-upload>
   </aside>
 
-  <main class="game-panel">
+  <section class="game-panel">
     <mat-card *ngIf="!selectedBook && !loading" class="empty-card">
       <mat-card-content class="empty-state-content">
         <h3 class="empty-title">Select an Adventure Book</h3>
@@ -45,5 +53,5 @@
       (saveGame)="saveGame()"
       (resumeSession)="resumeGame($event)"
     ></app-game-play>
-  </main>
-</div>
+  </section>
+</main>

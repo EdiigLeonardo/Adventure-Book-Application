@@ -1,106 +1,29 @@
-:host {
-  display: block;
-}
-
-.catalog-card {
-  overflow: hidden;
-  padding: 12px 8px;
-}
-
-.search-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin: 1rem 0;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--pictet-border, #E2DFD7);
-  border-radius: 6px;
-  background: var(--pictet-gold-light, #F7F3E9);
-  transition: border-color 0.2s ease;
-
-  &:focus-within {
-    border-color: var(--pictet-gold, #C5A059);
-  }
-}
-
-.search-box label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--pictet-navy, #0B2526);
-}
-
-.search-box input {
-  border: none;
-  background: transparent;
-  color: var(--pictet-text, #1A2525);
-  font-size: 0.92rem;
-  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
-  outline: none;
-}
-
-.search-box input::placeholder {
-  color: var(--pictet-text-muted, #5D6A69);
-}
-
-.book-list {
-  padding-top: 4px;
-}
-
-mat-list-item {
-  border-radius: 6px;
-  margin-bottom: 6px;
-  border-left: 3px solid transparent;
-  transition: all 0.2s ease;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--pictet-gold-light, #F7F3E9);
-  }
-
-  &.active {
-    background-color: var(--pictet-gold-light, #F7F3E9);
-    border-left-color: var(--pictet-gold, #C5A059);
-  }
-}
-
-.book-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
-  padding: 8px 0;
-}
-
-.book-title {
-  font-family: var(--font-serif, 'Cormorant Garamond', serif);
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--pictet-navy, #0B2526);
-}
-
-.book-badges {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-
-  .badge {
-    font-size: 0.72rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    padding: 2px 8px;
-    border-radius: 4px;
-
-    &.difficulty {
-      background-color: rgba(197, 160, 89, 0.2);
-      color: #7A5F20;
-    }
-
-    &.sections {
-      background-color: rgba(11, 37, 38, 0.08);
-      color: var(--pictet-navy, #0B2526);
-    }
-  }
-}
+:host { display: block; }
+.catalog-shell { max-width: 1080px; margin: 0 auto; }
+.catalog-heading { display:flex; justify-content:space-between; align-items:end; margin-bottom:20px; }
+h2 { margin:0 0 6px; color:#594537; font: 500 2rem/1.1 Georgia, serif; }
+.catalog-heading p { margin:0; color:#88766a; font-size:.83rem; }
+.library-count { color:#a29185; font-size:.76rem; text-transform:uppercase; letter-spacing:.12em; }
+.search-box { display:flex; align-items:center; gap:10px; background:#fffdfa; border:1px solid #e6ddd4; border-radius:6px; padding:10px 14px; box-shadow:0 4px 14px rgba(87,62,47,.04); }
+.search-box mat-icon { color:#b29a88; font-size:19px; }
+.search-box input { border:0; outline:0; flex:1; background:transparent; font: .8rem 'Trebuchet MS', sans-serif; color:#5b493e; }
+.search-box input::placeholder { color:#b3a59c; }
+.search-hint { color:#b7aaa1; font-size:.7rem; border:1px solid #e6ddd4; border-radius:4px; padding:2px 6px; }
+.filter-row { display:flex; align-items:center; gap:9px; margin:14px 0 18px; color:#9d8b7f; font-size:.72rem; }
+.filter { border:0; background:transparent; color:#8d796c; font-size:.72rem; padding:5px 9px; border-radius:12px; cursor:pointer; }
+.filter.active { background:#efe5da; color:#6b5140; }
+.book-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.book-entry { background:#fffdfa; border:1px solid #e8ded4; border-radius:7px; overflow:hidden; cursor:pointer; transition:transform .2s, box-shadow .2s; }
+.book-entry:hover,.book-entry.active { transform:translateY(-3px); box-shadow:0 12px 24px rgba(84,59,44,.1); }
+.book-cover { height:82px; display:flex; align-items:center; justify-content:center; color:#f9e4a8; font-size:2.5rem; background:#71594b; }
+.book-cover[data-index="1"] { background:#9a6a45; color:#ffdfa0; }
+.book-cover[data-index="2"] { background:#4b675e; color:#f5d788; }
+.book-copy { padding:15px 16px 16px; }
+.book-topline { display:flex; justify-content:space-between; color:#a69386; font-size:.66rem; text-transform:uppercase; letter-spacing:.08em; }
+.book-type { color:#9b6c3b; }
+h3 { margin:9px 0 7px; color:#4e3d34; font:500 1.22rem/1.1 Georgia,serif; }
+.book-copy p { min-height:48px; margin:0 0 14px; color:#8b7970; font-size:.76rem; line-height:1.45; }
+.book-cta { width:100%; border:0; border-radius:4px; background:#e5a62e; color:#fffaf0; padding:9px 12px; font:600 .72rem 'Trebuchet MS',sans-serif; letter-spacing:.03em; cursor:pointer; }
+.book-cta span { float:right; font-size:1rem; line-height:.7; }
+@media (max-width:800px) { .book-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:560px) { .catalog-heading{align-items:start; flex-direction:column; gap:8px;} .book-grid{grid-template-columns:1fr;} }

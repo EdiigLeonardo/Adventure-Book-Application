@@ -19,8 +19,15 @@ export class BookCatalogComponent {
   @Input() selectedBookId: string | null = null;
 
   @Output() bookSelected = new EventEmitter<Book>();
+  @Output() adventureStarted = new EventEmitter<Book>();
 
   selectBook(book: Book): void {
     this.bookSelected.emit(book);
+  }
+
+  startAdventure(book: Book, event: Event): void {
+    event.stopPropagation();
+    this.bookSelected.emit(book);
+    this.adventureStarted.emit(book);
   }
 }

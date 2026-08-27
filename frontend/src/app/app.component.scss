@@ -1,114 +1,19 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background: var(--pictet-bg, #f5f4f0);
-}
-
-.pictet-header {
-  background-color: var(--pictet-bg, #f7f3e9);
-  border-bottom: 2px solid var(--pictet-gold, #c5a059);
-  color: var(--pictet-navy, #0b2526);
-  padding: 16px 28px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.pictet-header-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand-badge {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.brand-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0;
-  max-width: 30%;
-  object-fit: cover;
-
-  img {
-    height: 38px;
-    width: auto;
-    object-fit: cover;
-  }
-}
-
-.brand-divider {
-  display: inline-block;
-  width: 2px;
-  height: 20px;
-  background-color: var(--pictet-gold, #c5a059);
-}
-
-.brand-subtitle {
-  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.82rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: #344847;
-  text-transform: uppercase;
-}
-
-.header-tagline {
-  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: #705315;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
-  gap: 28px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 28px;
-}
-
-.sidebar,
-.game-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.empty-card {
-  padding: 24px;
-
-  .empty-title {
-    font-family: var(--font-serif, "Cormorant Garamond", serif);
-    font-size: 1.6rem;
-    color: var(--pictet-navy, #0b2526);
-    margin-bottom: 8px;
-  }
-
-  .empty-text {
-    font-size: 0.95rem;
-    color: var(--pictet-text-muted, #5d6a69);
-    line-height: 1.5;
-  }
-}
-
-@media (max-width: 920px) {
-  .layout {
-    grid-template-columns: 1fr;
-    padding: 16px;
-  }
-
-  .header-tagline {
-    display: none;
-  }
-}
+:host { display:block; min-height:100vh; background:#f7f4ef; color:#57463b; }
+.pictet-header { background:#fffdfa; border-bottom:1px solid #e7ddd3; padding:14px 28px; }
+.pictet-header-container { max-width:1180px; margin:auto; }
+.brand-badge { display:flex; align-items:center; gap:12px; }
+.brand-logo img { height:28px; width:auto; filter:sepia(.25); }
+.brand-divider { width:1px; height:17px; background:#d9cbbd; }
+.brand-subtitle { color:#9a877a; font: .7rem 'Trebuchet MS',sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+.hero-intro { background:#71594b; color:#fff7ea; text-align:center; padding:30px 20px 34px; box-shadow: inset 0 -1px rgba(255,255,255,.08); }
+.hero-stars { color:#f0c755; font-size:1.05rem; letter-spacing:.16em; }
+.hero-intro h1 { margin:3px 0 8px; color:#f5cb58; font:500 clamp(2.2rem,5vw,3.5rem)/1 Georgia,serif; }
+.hero-intro p { margin:0; color:#f7eee3; font: .82rem/1.5 Georgia,serif; }
+.layout { max-width:1180px; margin:0 auto; padding:34px 28px 50px; }
+.sidebar { display:block; }
+.game-panel { max-width:780px; margin:0 auto; }
+.play-layout { padding-top:28px; }
+.empty-card { max-width:620px; margin:60px auto; background:#fffdfa!important; border:1px solid #e7ddd3!important; box-shadow:none!important; padding:28px; text-align:center; }
+.empty-title { color:#5b4639; font:500 1.8rem Georgia,serif; }
+.empty-text { color:#927f72; line-height:1.55; }
+@media(max-width:600px){ .pictet-header{padding:12px 16px;} .brand-subtitle{font-size:.6rem;} .layout{padding:24px 16px 40px;} }

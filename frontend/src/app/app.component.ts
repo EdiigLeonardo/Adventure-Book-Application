@@ -177,6 +177,11 @@ export class AppComponent implements OnInit {
     });
   }
 
+  startAdventure(book: Book): void {
+    this.selectedBook = book;
+    this.startGame();
+  }
+
   private showMessage(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
