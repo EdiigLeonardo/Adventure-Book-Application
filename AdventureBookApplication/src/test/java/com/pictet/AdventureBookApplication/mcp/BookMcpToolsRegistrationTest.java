@@ -27,7 +27,7 @@ class BookMcpToolsRegistrationTest {
 
         List<String> toolNames = providers.values().stream()
             .flatMap(provider -> Arrays.stream(provider.getToolCallbacks()))
-            .map(ToolCallback::getToolDefinition)
+            .map(callback -> callback.getToolDefinition())
             .map(definition -> definition.name())
             .toList();
 

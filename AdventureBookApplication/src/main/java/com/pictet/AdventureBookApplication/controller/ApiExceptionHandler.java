@@ -22,7 +22,7 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     ResponseEntity<Map<String, Object>> tooLarge(MaxUploadSizeExceededException ex) {
-        return response(HttpStatus.PAYLOAD_TOO_LARGE, "Uploaded file exceeds the configured size limit.");
+        return response(HttpStatus.CONTENT_TOO_LARGE, "Uploaded file exceeds the configured size limit.");
     }
 
     private ResponseEntity<Map<String, Object>> response(HttpStatus status, String message) {
