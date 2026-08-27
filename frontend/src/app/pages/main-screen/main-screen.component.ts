@@ -51,9 +51,16 @@ export class MainScreenComponent implements OnInit, OnDestroy {
           : 'Adventure uploaded.';
         this.snack.open(message, 'Close', { duration: 3000 });
       },
-      error: () => {
+      error: (err) => {
         this.isUploading = false;
-        this.snack.open('The book file could not be uploaded.', 'Close', { duration: 3000 });
+        const validationResult = err?.error;
+        let message = 'The book file could not be uploaded.';
+        if (validationResult && Array.isArray(validationResult.errors) && validationResult.errors.length > 0) {
+          message = `Validation failed: ${validationResult.errors.join('; ')}`;
+        } else if (typeof validationResult?.message === 'string') {
+          message = validationResult.message;
+        }
+        this.snack.open(message, 'Close', { duration: 6000 });
       }
     });
   }
