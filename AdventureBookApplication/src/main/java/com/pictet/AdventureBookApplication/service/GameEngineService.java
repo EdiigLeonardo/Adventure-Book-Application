@@ -58,14 +58,13 @@ public class GameEngineService {
                 .orElse(null)
             : null;
 
-        if (selected != null) {
-            applyConsequence(session, selected.getConsequence());
-            session.setCurrentSectionId(gotoId);
-            session.getHistory().add("Chose option -> " + gotoId);
-        } else {
-            session.getHistory().add("Invalid choice -> " + gotoId);
-            return session;
+        if (selected == null) {
+            throw new IllegalArgumentException("The selected option is not available from the current section.");
         }
+
+        applyConsequence(session, selected.getConsequence());
+        session.setCurrentSectionId(gotoId);
+        session.getHistory().add("Chose option -> " + gotoId);
 
         Section destination = session.getBook().getSections().stream()
             .filter(section -> section != null)
@@ -89,7 +88,8 @@ public class GameEngineService {
         if (consequence.getType() == ConsequenceType.LOSE_HEALTH) {
             session.setHealth(Math.max(0, session.getHealth() - (consequence.getValue() == null ? 0 : consequence.getValue())));
         } else if (consequence.getType() == ConsequenceType.GAIN_HEALTH) {
-            session.setHealth(Math.max(0, session.getHealth() + (consequence.getValue() == null ? 0 : consequence.getValue())));
+            int heal = consequence.getValue() == null ? 0 : consequence.getValue();
+            session.setHealth(Math.min(10, session.getHealth() + heal));
         }
     }
 }

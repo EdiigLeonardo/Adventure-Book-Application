@@ -54,6 +54,9 @@ public class BookCatalogService {
     }
 
     public synchronized UploadResult saveUploadedBookIdempotently(Book book) {
+        if (book == null || book.getId() == null || book.getId().isBlank()) {
+            throw new IllegalArgumentException("The book root 'id' is required.");
+        }
         ValidationResult validationResult = validatorService.validate(book);
         if (!validationResult.isValid()) {
             throw new IllegalArgumentException(String.join("; ", validationResult.getErrors()));

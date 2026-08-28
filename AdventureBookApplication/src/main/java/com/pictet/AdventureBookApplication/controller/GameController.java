@@ -67,10 +67,6 @@ public class GameController {
         if (gotoId == null || gotoId.isBlank()) {
             throw new IllegalArgumentException("gotoId is required.");
         }
-        var current = book.getSections().stream().filter(s -> s != null && s.getId() != null && s.getId().equals(session.getCurrentSectionId())).findFirst().orElse(null);
-        if (current == null || current.getOptions() == null || current.getOptions().stream().noneMatch(o -> gotoId.equals(o.getGotoId()))) {
-            throw new IllegalArgumentException("The selected option is not available from the current section.");
-        }
         GameSession updated = gameEngineService.chooseOption(session, gotoId);
         GameSession saved = gameSessionRepository.save(updated);
         return ResponseEntity.ok(saved);

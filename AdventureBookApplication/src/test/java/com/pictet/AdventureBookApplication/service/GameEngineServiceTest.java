@@ -175,14 +175,24 @@ class GameEngineServiceTest {
     }
 
     @Test
-    void chooseOption_withInvalidGotoId_doesNotAdvance() {
+    void chooseOption_withInvalidGotoId_throwsIllegalArgumentException() {
         Book book = buildMinimalBook();
         GameSession session = engine.startGame(book);
 
-        GameSession result = engine.chooseOption(session, "non-existent");
+        assertThatThrownBy(() -> engine.chooseOption(session, "non-existent"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("The selected option is not available");
+    }
 
-        assertThat(result.getCurrentSectionId()).isEqualTo("begin");
-        assertThat(result.getHistory()).anyMatch(e -> e.contains("Invalid choice"));
+    @Test
+    void chooseOption_withGainHealthConsequence_capsAtTenHealth() {
+        Book book = buildBookWithConsequence(ConsequenceType.GAIN_HEALTH, 5);
+        GameSession session = engine.startGame(book);
+        session.setHealth(8);
+
+        session = engine.chooseOption(session, "end");
+
+        assertThat(session.getHealth()).isEqualTo(10);
     }
 
     @Test

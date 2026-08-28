@@ -199,6 +199,15 @@ class BookCatalogServiceTest {
     }
 
     @Test
+    void saveUploadedBook_missingId_throwsIllegalArgumentException() {
+        Book invalidBook = buildBook(null, "No ID", "HARD", null);
+
+        assertThatThrownBy(() -> catalogService.saveUploadedBook(invalidBook))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("id' is required");
+    }
+
+    @Test
     void saveUploadedBook_overwritesExistingBookWithSameId() {
         Book updated = buildBook("book-a", "Pirates Updated", "HARD", null);
         ValidationResult valid = new ValidationResult();
