@@ -80,9 +80,10 @@ public class GameController {
         }
 
         Book book = catalogService.findById(session.getBookId());
-        if (book != null) {
-            session.setBook(book);
+        if (book == null) {
+            throw new IllegalStateException("The book associated with this session is no longer available.");
         }
+        session.setBook(book);
         gameSessionRepository.save(session);
         return ResponseEntity.ok().build();
     }
@@ -95,9 +96,10 @@ public class GameController {
         }
 
         Book book = catalogService.findById(session.getBookId());
-        if (book != null) {
-            session.setBook(book);
+        if (book == null) {
+            throw new IllegalStateException("The book associated with this session is no longer available.");
         }
+        session.setBook(book);
         return ResponseEntity.ok(session);
     }
 }

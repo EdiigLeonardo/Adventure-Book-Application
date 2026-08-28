@@ -1,5 +1,6 @@
 package com.pictet.AdventureBookApplication.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pictet.AdventureBookApplication.model.Book;
 import com.pictet.AdventureBookApplication.service.BookCatalogService;
 import com.pictet.AdventureBookApplication.validation.BookValidatorService;
@@ -24,6 +25,7 @@ public class BookController {
 
     private final BookCatalogService catalogService;
     private final BookValidatorService validatorService;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public BookController(BookCatalogService catalogService, BookValidatorService validatorService) {
         this.catalogService = catalogService;
@@ -68,7 +70,7 @@ public class BookController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationResult);
             }
 
-            Book book = new com.fasterxml.jackson.databind.ObjectMapper().readValue(json, Book.class);
+            Book book = objectMapper.readValue(json, Book.class);
             BookCatalogService.UploadResult result = catalogService.saveUploadedBookIdempotently(book);
             return ResponseEntity.status(result.created() ? HttpStatus.CREATED : HttpStatus.OK)
                 .body(new BookUploadResponse(result.book(), validationResult.getWarnings()));
