@@ -26,13 +26,13 @@ export class GameService {
   startGame(bookId: string): Observable<GameSession> {
     return this.http
       .post<GameSession>('/api/v1/games/start', { bookId })
-      .pipe(tap((session) => this.gameStateSubject.next(session)));
+      .pipe(tap((session) => this.syncSession(session)));
   }
 
   makeChoice(sessionId: string, gotoId: string): Observable<GameSession> {
     return this.http
       .post<GameSession>(`/api/v1/games/${sessionId}/choose`, { gotoId })
-      .pipe(tap((session) => this.gameStateSubject.next(session)));
+      .pipe(tap((session) => this.syncSession(session)));
   }
 
   saveGame(sessionId: string): Observable<void> {
@@ -42,10 +42,15 @@ export class GameService {
   resumeGame(sessionId: string): Observable<GameSession> {
     return this.http
       .get<GameSession>(`/api/v1/games/${sessionId}/resume`)
-      .pipe(tap((session) => this.gameStateSubject.next(session)));
+      .pipe(tap((session) => this.syncSession(session)));
   }
 
   syncSession(session: GameSession | null): void {
     this.gameStateSubject.next(session);
+    if (session && session.status === 'IN_PROGRESS') {
+      sessionStorage.setItem('activeSessionId', session.id);
+    } else {
+      sessionStorage.removeItem('activeSessionId');
+    }
   }
 }
