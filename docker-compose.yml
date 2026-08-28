@@ -2,6 +2,7 @@ services:
   backend:
     build:
       context: ./AdventureBookApplication
+      network: host
     environment:
       JPA_DDL_AUTO: ${JPA_DDL_AUTO:-create-drop}
       H2_CONSOLE_ENABLED: ${H2_CONSOLE_ENABLED:-false}
@@ -15,6 +16,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      network: host
     ports:
       - "${FRONTEND_PORT:-8080}:80"
     depends_on:
